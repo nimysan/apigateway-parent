@@ -8,6 +8,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.reactive.server.WebTestClient;
 
 import com.platenogroup.apigateway.dispatcher.GatewayEngineApplication;
+import com.platenogroup.apigateway.dispatcher.filter.FilterConfig;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = GatewayEngineApplication.class, webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
@@ -15,18 +16,25 @@ public class LocalRouterTest {
 
 	@Autowired
 	private WebTestClient webTestClient;
-	
+
 	@Test
 	public void routeToLocalRequest() {
 		// proxyLocal将请求代理的本地local
 		webTestClient.get().uri("/api/sample").exchange().expectStatus().isOk();
 	}
-	
+
 	@Test
 	public void postHeaderFilter() {
 		// proxyLocal将请求代理的本地local
 		webTestClient.get().uri("/api/sample").exchange().expectStatus().isOk().expectHeader()
 				.valueEquals("x-png-gateway", "platenogroup");
+	}
+
+	@Test
+	public void requestId() {
+		// proxyLocal将请求代理的本地local
+		webTestClient.get().uri("/api/sample").exchange().expectStatus().isOk().expectHeader()
+				.valueMatches(FilterConfig.X_PNG_REQUEST_ID, "test.*");
 	}
 
 	@Test
