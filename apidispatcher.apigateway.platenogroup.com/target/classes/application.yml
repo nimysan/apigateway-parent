@@ -10,7 +10,8 @@ spring:
           filters:
             - StripPrefix=1
           uri: "http://localhost:${server.port}"
-# static route
+          
+#static route
 #ops
 management:
   endpoints:
