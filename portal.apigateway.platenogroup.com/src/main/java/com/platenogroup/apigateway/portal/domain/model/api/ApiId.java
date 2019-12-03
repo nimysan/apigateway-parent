@@ -19,8 +19,13 @@ public final class ApiId implements ValueObject<ApiId> {
 		return false;
 	}
 
+	public String toSimple() {
+		return this.id;
+	}
+
 	/**
 	 * 构造方法
+	 * 
 	 * @param id
 	 */
 	public ApiId(String id) {
