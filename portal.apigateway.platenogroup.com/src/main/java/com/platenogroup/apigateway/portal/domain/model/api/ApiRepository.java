@@ -11,6 +11,6 @@ import org.springframework.data.repository.CrudRepository;
  * @author SeanYe
  *
  */
-public interface ApiRepository extends CrudRepository<Api, ApiId> {
+public interface ApiRepository extends CrudRepository<Api, String> {
 
 }

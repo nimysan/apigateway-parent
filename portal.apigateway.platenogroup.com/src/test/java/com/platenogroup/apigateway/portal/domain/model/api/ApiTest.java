@@ -9,8 +9,8 @@ public class ApiTest {
 	@Test
 	public void testCargoConstruct() {
 		ApiRouteDefinition route = new ApiRouteDefinition();
-		Api api = new Api("test", route);
-		assertThat(api.getId()).isNotNull();
+		Api api = new Api("test", "http", "www.baidu.com", 80, "/test");
+		assertThat(api.getName()).isNotNull();
 		assertThat(api.getName()).isEqualTo("test");
 		assertThat(api.getRoute()).isEqualTo(route);
 	}

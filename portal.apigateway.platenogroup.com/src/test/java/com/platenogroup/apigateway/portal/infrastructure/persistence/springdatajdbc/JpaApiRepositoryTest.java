@@ -13,7 +13,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import com.platenogroup.apigateway.portal.domain.model.api.Api;
 import com.platenogroup.apigateway.portal.domain.model.api.ApiRepository;
-import com.platenogroup.apigateway.portal.domain.model.api.ApiRouteDefinition;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -26,7 +25,6 @@ public class JpaApiRepositoryTest {
 	@Test
 	public void testSaveApi() {
 		Api api = sample();
-		assertThat(api.getId().toSimple()).isNotNull();
 		apiRepository.save(api);
 
 		Optional<Api> findById = apiRepository.findById(api.getId());
@@ -43,7 +41,7 @@ public class JpaApiRepositoryTest {
 	}
 
 	private Api sample() {
-		Api api = new Api("test", new ApiRouteDefinition());
+		Api api = new Api("test", "http", "www.baidu.com", 80, "/test");
 		return api;
 	}
 

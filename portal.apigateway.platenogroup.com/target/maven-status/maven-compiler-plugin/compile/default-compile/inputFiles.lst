@@ -1,0 +1,17 @@
+D:\eclipse-workspace\apigateway-parent\portal.apigateway.platenogroup.com\src\main\java\com\platenogroup\apigateway\portal\domain\shared\AbstractSpecification.java
+D:\eclipse-workspace\apigateway-parent\portal.apigateway.platenogroup.com\src\main\java\com\platenogroup\apigateway\portal\domain\shared\NotSpecification.java
+D:\eclipse-workspace\apigateway-parent\portal.apigateway.platenogroup.com\src\main\java\com\platenogroup\apigateway\portal\MainApplication.java
+D:\eclipse-workspace\apigateway-parent\portal.apigateway.platenogroup.com\src\main\java\com\platenogroup\apigateway\portal\domain\model\apiconsumer\ApiConsumer.java
+D:\eclipse-workspace\apigateway-parent\portal.apigateway.platenogroup.com\src\main\java\com\platenogroup\apigateway\portal\domain\model\api\Api.java
+D:\eclipse-workspace\apigateway-parent\portal.apigateway.platenogroup.com\src\main\java\com\platenogroup\apigateway\portal\domain\shared\Entity.java
+D:\eclipse-workspace\apigateway-parent\portal.apigateway.platenogroup.com\src\main\java\com\platenogroup\apigateway\portal\domain\shared\DomainEvent.java
+D:\eclipse-workspace\apigateway-parent\portal.apigateway.platenogroup.com\src\main\java\com\platenogroup\apigateway\portal\domain\model\api\ApiRouteDefinition.java
+D:\eclipse-workspace\apigateway-parent\portal.apigateway.platenogroup.com\src\main\java\com\platenogroup\apigateway\portal\domain\shared\AndSpecification.java
+D:\eclipse-workspace\apigateway-parent\portal.apigateway.platenogroup.com\src\main\java\com\platenogroup\apigateway\portal\domain\shared\DomainObjectUtils.java
+D:\eclipse-workspace\apigateway-parent\portal.apigateway.platenogroup.com\src\main\java\com\platenogroup\apigateway\portal\domain\shared\OrSpecification.java
+D:\eclipse-workspace\apigateway-parent\portal.apigateway.platenogroup.com\src\main\java\com\platenogroup\apigateway\portal\domain\shared\ValueObject.java
+D:\eclipse-workspace\apigateway-parent\portal.apigateway.platenogroup.com\src\main\java\com\platenogroup\apigateway\portal\domain\shared\Specification.java
+D:\eclipse-workspace\apigateway-parent\portal.apigateway.platenogroup.com\src\main\java\com\platenogroup\apigateway\portal\infrastructure\id\DistributedIdGenerator.java
+D:\eclipse-workspace\apigateway-parent\portal.apigateway.platenogroup.com\src\main\java\com\platenogroup\apigateway\portal\domain\model\apiconsumer\ApiConsumerRepository.java
+D:\eclipse-workspace\apigateway-parent\portal.apigateway.platenogroup.com\src\main\java\com\platenogroup\apigateway\portal\domain\model\api\ApiRepository.java
+D:\eclipse-workspace\apigateway-parent\portal.apigateway.platenogroup.com\src\main\java\com\platenogroup\apigateway\portal\domain\model\apiconsumer\Application.java
