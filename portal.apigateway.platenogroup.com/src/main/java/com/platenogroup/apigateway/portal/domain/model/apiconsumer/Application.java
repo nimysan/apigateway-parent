@@ -5,6 +5,7 @@ import javax.persistence.Id;
 
 import com.platenogroup.apigateway.portal.domain.shared.Entity;
 
+@javax.persistence.Entity
 public class Application implements Entity<Application> {
 
 	@Id

@@ -2,12 +2,15 @@ package com.platenogroup.apigateway.portal.infrastructure.persistence.springdata
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import java.util.Optional;
 import java.util.UUID;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.core.annotation.Order;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -35,5 +38,17 @@ public class JpaApiConsumerRepositoryTest {
 		ApiConsumer consumer = new ApiConsumer(idGenerator.nextId());
 		consumerRepository.save(consumer);
 		assertThat(consumerRepository.count()).isEqualTo(1l);
+	}
+
+	@Test
+	@Ignore
+	public void testRegisterAppForConsumer() {
+		ApiConsumer consumer = new ApiConsumer(idGenerator.nextId());
+		consumerRepository.save(consumer);
+
+		//
+		consumer.registerApplication("全球门店管理系统", "GlobalShopSystem");
+		Optional<ApiConsumer> loadConsumer = consumerRepository.findById(consumer.getConsumerId());
+		assertThat(loadConsumer.get().listApplications().size()).isEqualTo(1l);
 	}
 }

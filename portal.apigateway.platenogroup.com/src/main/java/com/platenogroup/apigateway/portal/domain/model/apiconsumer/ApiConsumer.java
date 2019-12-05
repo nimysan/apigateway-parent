@@ -1,12 +1,17 @@
 package com.platenogroup.apigateway.portal.domain.model.apiconsumer;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
+import javax.persistence.CascadeType;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 import org.apache.commons.lang.Validate;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.platenogroup.apigateway.portal.domain.shared.Entity;
 
 /**
@@ -20,6 +25,7 @@ import com.platenogroup.apigateway.portal.domain.shared.Entity;
  * @author SeanYe
  *
  */
+@javax.persistence.Entity
 public class ApiConsumer implements Entity<ApiConsumer> {
 
 	ApiConsumer() {
@@ -34,6 +40,8 @@ public class ApiConsumer implements Entity<ApiConsumer> {
 		this.consumerId = consumerId;
 	}
 
+	@OneToMany(cascade = CascadeType.REFRESH, mappedBy = "applicationId", targetEntity = Application.class, fetch = FetchType.EAGER)
+	@JsonManagedReference
 	private List<Application> applications = new ArrayList<Application>();
 
 	@Override
@@ -54,10 +62,24 @@ public class ApiConsumer implements Entity<ApiConsumer> {
 		app.deactive();
 	}
 
+	/**
+	 * 添加一个App
+	 * 
+	 * @param app
+	 */
 	public void addApplication(Application app) {
 		if (!applications.contains(app)) {
 			applications.add(app);
 		}
 		// need to publish event
 	}
+
+	public void registerApplication(String string, String string2) {
+
+	}
+
+	public List<Application> listApplications() {
+		return Collections.unmodifiableList(this.applications);
+	}
+
 }
