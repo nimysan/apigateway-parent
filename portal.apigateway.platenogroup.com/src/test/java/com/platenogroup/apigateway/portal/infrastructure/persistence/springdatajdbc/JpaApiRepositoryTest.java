@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.Optional;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,8 +20,19 @@ import com.platenogroup.apigateway.portal.domain.model.api.ApiRepository;
 @ContextConfiguration
 public class JpaApiRepositoryTest {
 
+	/**
+	 * 1. Base url ： https://api.publicapis.org/ 2. GET 3. /entries
+	 */
+	@Before
+	public void setUp() {
+		// 这是一个可以实际跑起来的API，详情参见： https://github.com/davemachado/public-api
+		testPublicApis = new Api("GitHub公共API获取，用于测试", "https", "api.publicapis.org", 80, "/entries");
+	}
+
 	@Autowired
 	private ApiRepository apiRepository;
+
+	private Api testPublicApis;
 
 	@Test
 	public void testSaveApi() {
@@ -30,6 +42,18 @@ public class JpaApiRepositoryTest {
 		Optional<Api> findById = apiRepository.findById(api.getId());
 		System.out.println(findById.get());
 		assertThat(findById.get().getName()).isEqualTo("test");
+	}
+
+	@Test
+	public void testDeactiveApi() {
+		apiRepository.save(testPublicApis);
+		Api api = apiRepository.findById(testPublicApis.getId()).get();
+		api.deactive();
+		apiRepository.save(testPublicApis);
+		Optional<Api> findByName = apiRepository.findByName(testPublicApis.getName());
+		Api deactiveApi = findByName.get();
+		assertThat(deactiveApi.getName()).isEqualTo(testPublicApis.getName());
+		assertThat(deactiveApi.isActive()).isEqualTo(false);
 	}
 
 	@Test

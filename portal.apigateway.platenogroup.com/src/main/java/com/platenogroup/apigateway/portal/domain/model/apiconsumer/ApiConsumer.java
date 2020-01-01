@@ -35,9 +35,19 @@ public class ApiConsumer implements Entity<ApiConsumer> {
 	@Id
 	private String consumerId;
 
-	public ApiConsumer(String consumerId) {
+	/**
+	 * 有功邮箱信息，有唯一性约束
+	 */
+	private String email;
+
+	public ApiConsumer(String consumerId, String email) {
 		Validate.notNull(consumerId, "ConsumerId can't be null");
+		Validate.isTrue(email.matches(""), "email must be a valie adddress");
+		// email need to be unique
+
 		this.consumerId = consumerId;
+
+		this.email = email;
 	}
 
 	@OneToMany(cascade = CascadeType.REFRESH, mappedBy = "applicationId", targetEntity = Application.class, fetch = FetchType.EAGER)

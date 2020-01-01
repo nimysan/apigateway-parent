@@ -11,6 +11,7 @@
 	<modules>
 		<module>apidispatcher.apigateway.platenogroup.com</module>
 		<module>portal.apigateway.platenogroup.com</module>
+		<module>apigateway-commons</module>
 	</modules>
 
 	<properties>

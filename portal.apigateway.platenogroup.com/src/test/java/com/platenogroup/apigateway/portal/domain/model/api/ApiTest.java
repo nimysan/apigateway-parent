@@ -14,4 +14,9 @@ public class ApiTest {
 		assertThat(api.getName()).isEqualTo("test");
 		assertThat(api.getRoute()).isEqualTo(route);
 	}
+
+	public void testAddApi() {
+		
+	}
+
 }

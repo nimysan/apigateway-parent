@@ -56,6 +56,7 @@ public class Api implements Entity<Api> {
 	private String host;
 	private int port = 80;
 	private String path; // default PATH
+	private byte state = 0; // 0 active 1 not active
 
 	private int connectTimeout = 60000;
 	private int writeTimeout = 60000;
@@ -83,6 +84,19 @@ public class Api implements Entity<Api> {
 
 	private String generateNextId() {
 		return UUID.randomUUID().toString();
+	}
+
+	/**
+	 * 将一个api设置为不可用
+	 */
+	public void deactive() {
+		if (this.state == 0) {
+			this.state = 1;
+
+			// TODO trigger event
+			return;
+		}
+		throw new IllegalArgumentException("Api is alreay deative");
 	}
 
 	public String getName() {
@@ -183,6 +197,10 @@ public class Api implements Entity<Api> {
 
 	public Api() {
 		// spring-data-jpa needed
+	}
+
+	public boolean isActive() {
+		return state == 0;
 	}
 
 	@Override

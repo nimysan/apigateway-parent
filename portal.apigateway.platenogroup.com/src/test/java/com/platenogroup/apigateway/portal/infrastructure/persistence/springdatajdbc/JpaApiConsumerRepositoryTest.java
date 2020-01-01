@@ -10,7 +10,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.core.annotation.Order;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -35,7 +34,7 @@ public class JpaApiConsumerRepositoryTest {
 
 	@Test
 	public void testCreateApiConsumer() {
-		ApiConsumer consumer = new ApiConsumer(idGenerator.nextId());
+		ApiConsumer consumer = new ApiConsumer(idGenerator.nextId(), "test@test.com");
 		consumerRepository.save(consumer);
 		assertThat(consumerRepository.count()).isEqualTo(1l);
 	}
@@ -43,7 +42,7 @@ public class JpaApiConsumerRepositoryTest {
 	@Test
 	@Ignore
 	public void testRegisterAppForConsumer() {
-		ApiConsumer consumer = new ApiConsumer(idGenerator.nextId());
+		ApiConsumer consumer = new ApiConsumer(idGenerator.nextId(),"test@test.com");
 		consumerRepository.save(consumer);
 
 		//
