@@ -2,6 +2,7 @@ package com.platenogroup.apigateway.portal.application.service;
 
 import com.platenogroup.apigateway.common.interfaces.dto.base.IdRespBody;
 import com.platenogroup.apigateway.common.interfaces.dto.base.RequestDto;
+import com.platenogroup.apigateway.portal.infrastructure.exception.BusinessException;
 import com.platenogroup.apigateway.portal.interfaces.dto.api.ApiDetailRespBody;
 import com.platenogroup.apigateway.portal.interfaces.dto.api.ApiDto;
 import com.platenogroup.apigateway.portal.interfaces.dto.api.DeleteApiRespBody;
@@ -24,4 +25,6 @@ public interface ApiService {
 	 * @param apiId
 	 */
 	public DeleteApiRespBody deleteApi(String apiId);
+
+	public void deactive(String apiName) throws BusinessException;
 }

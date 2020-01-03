@@ -26,6 +26,14 @@ public class BaseController {
 	@Autowired
 	private ExceptionHandler exceptionHandler;
 
+	public void setApplicationUtil(ApplicationUtil applicationUtil) {
+		this.applicationUtil = applicationUtil;
+	}
+
+	public void setExceptionHandler(ExceptionHandler exceptionHandler) {
+		this.exceptionHandler = exceptionHandler;
+	}
+
 	/**
 	 * format 失败 response。
 	 * 

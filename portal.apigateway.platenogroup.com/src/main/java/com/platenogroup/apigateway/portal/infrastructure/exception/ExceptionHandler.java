@@ -27,6 +27,12 @@ public class ExceptionHandler {
 
 	@Autowired
 	private ApplicationUtil applicationUtil;
+	
+
+	public void setApplicationUtil(ApplicationUtil applicationUtil) {
+		this.applicationUtil = applicationUtil;
+	}
+
 
 	public Map<String, String> handle(Exception e) {
 
