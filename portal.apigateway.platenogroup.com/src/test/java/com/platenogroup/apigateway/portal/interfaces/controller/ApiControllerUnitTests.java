@@ -92,12 +92,22 @@ public class ApiControllerUnitTests {
 	@Test
 	public void testCreateApi() throws Exception {
 		RequestDto<ApiDto> createApiDao = createApiDao("botao");
-
 		when(apiService.addApi(Mockito.any(RequestDto.class))).thenReturn(new IdRespBody("1234"));
 		String jsonString = JSON.toJSONString(createApiDao);
 		mvc.perform(
 				MockMvcRequestBuilders.post("/api/").contentType(MediaType.APPLICATION_JSON_UTF8).content(jsonString))
 				.andDo(print()).andExpect(status().isOk()).andExpect(jsonPath("$.body.id", is("1234")));
+	}
+
+	@Test
+	public void testCreateApiException() throws Exception {
+		RequestDto<ApiDto> apiCreateParam = createApiDao("botao");
+		BusinessException businessException = new BusinessException("9000", "Api Does not exist");
+		doThrow(businessException).when(apiService).addApi(Mockito.any(RequestDto.class));
+		String jsonString = JSON.toJSONString(apiCreateParam);
+		mvc.perform(
+				MockMvcRequestBuilders.post("/api/").contentType(MediaType.APPLICATION_JSON_UTF8).content(jsonString))
+				.andDo(print()).andExpect(status().isOk()).andExpect(jsonPath("$.returnCode", is("9000")));
 	}
 
 	private RequestDto<ApiDto> createApiDao(String apiName) {

@@ -17,7 +17,7 @@ public interface ApiService {
 
 	public ApiDetailRespBody getByName(String apiName);
 
-	public IdRespBody addApi(RequestDto<ApiDto> apiDto);
+	public IdRespBody addApi(RequestDto<ApiDto> apiDto) throws BusinessException;
 
 	/**
 	 * 通过id删除API
