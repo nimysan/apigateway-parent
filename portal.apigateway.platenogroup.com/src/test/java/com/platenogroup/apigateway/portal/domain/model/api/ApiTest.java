@@ -2,8 +2,11 @@ package com.platenogroup.apigateway.portal.domain.model.api;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+import org.junit.platform.runner.JUnitPlatform;
+import org.junit.runner.RunWith;
 
+@RunWith(JUnitPlatform.class)
 public class ApiTest {
 
 	@Test
@@ -13,10 +16,6 @@ public class ApiTest {
 		assertThat(api.getName()).isNotNull();
 		assertThat(api.getName()).isEqualTo("test");
 		assertThat(api.getRoute()).isEqualTo(route);
-	}
-
-	public void testAddApi() {
-		
 	}
 
 }

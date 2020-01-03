@@ -20,6 +20,7 @@ import com.platenogroup.apigateway.portal.infrastructure.id.DistributedIdGenerat
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @ContextConfiguration
+@Ignore
 public class JpaApiConsumerRepositoryTest {
 
 	@Autowired

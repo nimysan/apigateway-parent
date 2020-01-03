@@ -5,6 +5,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import java.util.Optional;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,7 @@ import com.platenogroup.apigateway.portal.domain.model.api.ApiRepository;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @ContextConfiguration
+@Ignore
 public class JpaApiRepositoryTest {
 
 	/**
