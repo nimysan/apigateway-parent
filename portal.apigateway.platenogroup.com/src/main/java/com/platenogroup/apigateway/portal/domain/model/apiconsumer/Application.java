@@ -19,7 +19,6 @@ public class Application implements Entity<Application> {
 	/**
 	 * 详细说明
 	 */
-	@Column(columnDefinition = "applicaton function description", name = "description", length = 255)
 	private String description;
 
 	@Column(name = "isActive")
@@ -40,6 +39,14 @@ public class Application implements Entity<Application> {
 
 	public String getApplicationId() {
 		return applicationId;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public String getDescription() {
+		return description;
 	}
 
 }

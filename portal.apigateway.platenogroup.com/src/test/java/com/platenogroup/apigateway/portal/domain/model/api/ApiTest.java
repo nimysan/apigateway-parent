@@ -38,10 +38,10 @@ public class ApiTest {
 	public void testAddAndRemoveTagForApi() {
 		Api api = getSampleApi();
 		api.addTag("low");
-		assertThat(api.getTags()).contains(new ApiTag("low"));
+		assertThat(api.getTags()).contains(new SimpleTag("low"));
 
 		api.removeTag("low");
-		assertThat(api.getTags()).doesNotContain(new ApiTag("low"));
+		assertThat(api.getTags()).doesNotContain(new SimpleTag("low"));
 	}
 
 	private Api getSampleApi() {

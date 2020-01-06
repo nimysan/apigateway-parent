@@ -16,5 +16,5 @@ import org.springframework.data.repository.CrudRepository;
 public interface ApiRepository extends CrudRepository<Api, String> {
 
 	Optional<Api> findByName(String id);
-	
+
 }

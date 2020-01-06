@@ -3,13 +3,21 @@ package com.platenogroup.apigateway.portal.domain.model.api;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Embedded;
 import javax.persistence.EntityListeners;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 import org.apache.commons.lang.Validate;
+import org.hibernate.annotations.GenericGenerator;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import com.google.common.collect.ImmutableSet;
+import com.platenogroup.apigateway.portal.constants.CommonConstants;
 import com.platenogroup.apigateway.portal.domain.shared.Entity;
 
 /**
@@ -49,6 +57,8 @@ import com.platenogroup.apigateway.portal.domain.shared.Entity;
 public class Api implements Entity<Api> {
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO, generator = CommonConstants.DIST_ID_GENERATOR_NAME)
+	@GenericGenerator(name = CommonConstants.DIST_ID_GENERATOR_NAME, strategy = CommonConstants.DIST_ID_GENERATOR_IMPL)
 	private String id;
 
 	private String name;
@@ -64,15 +74,17 @@ public class Api implements Entity<Api> {
 	private int writeTimeout = 60000;
 	private int readTimeout = 60000;
 
-	private Set<ApiTag> tags;
+	@OneToMany(cascade = CascadeType.PERSIST, targetEntity = SimpleTag.class, fetch = FetchType.EAGER)
+	private Set<SimpleTag> tags;
 
+	@Embedded
 	private ApiRouteDefinition route;
 
 	public boolean sameIdentityAs(Api other) {
 		return other.getName().contentEquals(this.getName());
 	}
 
-	public Set<ApiTag> getTags() {
+	public Set<SimpleTag> getTags() {
 		return ImmutableSet.copyOf(tags);
 	}
 
@@ -108,9 +120,9 @@ public class Api implements Entity<Api> {
 	 */
 	public synchronized void addTag(String tagValue) {
 		Validate.notNull(tagValue);
-		ApiTag tag = new ApiTag(tagValue);
+		SimpleTag tag = new SimpleTag(tagValue);
 		if (tags == null) {
-			tags = new HashSet<ApiTag>();
+			tags = new HashSet<SimpleTag>();
 		}
 		tags.add(tag);
 	}
@@ -244,7 +256,7 @@ public class Api implements Entity<Api> {
 		if (tags == null) {
 			return;
 		}
-		tags.remove(new ApiTag(string));
+		tags.remove(new SimpleTag(string));
 	}
 
 }
