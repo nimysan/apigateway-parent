@@ -1,6 +1,7 @@
 package com.platenogroup.apigateway.portal.domain.model.api;
 
-import java.util.UUID;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.EntityListeners;
 import javax.persistence.Id;
@@ -8,6 +9,7 @@ import javax.persistence.Id;
 import org.apache.commons.lang.Validate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
+import com.google.common.collect.ImmutableSet;
 import com.platenogroup.apigateway.portal.domain.shared.Entity;
 
 /**
@@ -62,10 +64,16 @@ public class Api implements Entity<Api> {
 	private int writeTimeout = 60000;
 	private int readTimeout = 60000;
 
+	private Set<ApiTag> tags;
+
 	private ApiRouteDefinition route;
 
 	public boolean sameIdentityAs(Api other) {
-		return false;
+		return other.getName().contentEquals(this.getName());
+	}
+
+	public Set<ApiTag> getTags() {
+		return ImmutableSet.copyOf(tags);
 	}
 
 	public Api(String name, String protocol, String host, int port, String path) {
@@ -79,11 +87,32 @@ public class Api implements Entity<Api> {
 		this.port = port;
 		this.path = path;
 		this.host = host;
-		this.id = generateNextId();
 	}
 
-	private String generateNextId() {
-		return UUID.randomUUID().toString();
+	/**
+	 * 检查一个API是否已经可以使用，如果可以使用，发布ApiReady Event. API转发引擎会将API加入代理系列。
+	 * 
+	 * @return
+	 */
+	public boolean isReady() {
+		if (this.getRoute() == null) {
+			return false;
+		}
+		return this.isActive();
+	}
+
+	/**
+	 * 给当前API添加TAG
+	 * 
+	 * @param tagValue
+	 */
+	public synchronized void addTag(String tagValue) {
+		Validate.notNull(tagValue);
+		ApiTag tag = new ApiTag(tagValue);
+		if (tags == null) {
+			tags = new HashSet<ApiTag>();
+		}
+		tags.add(tag);
 	}
 
 	/**
@@ -92,8 +121,6 @@ public class Api implements Entity<Api> {
 	public void deactive() {
 		if (this.state == 0) {
 			this.state = 1;
-
-			// TODO trigger event
 			return;
 		}
 		throw new IllegalArgumentException("Api is alreay deative");
@@ -206,6 +233,18 @@ public class Api implements Entity<Api> {
 	@Override
 	public String toString() {
 		return "Api [id=" + id + ", name=" + name + ", description=" + description + ", route=" + route + "]";
+	}
+
+	/**
+	 * 存在則刪除，不存在不報錯
+	 * 
+	 * @param string
+	 */
+	public void removeTag(String string) {
+		if (tags == null) {
+			return;
+		}
+		tags.remove(new ApiTag(string));
 	}
 
 }

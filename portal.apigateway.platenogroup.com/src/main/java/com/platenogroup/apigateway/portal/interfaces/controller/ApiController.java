@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.platenogroup.apigateway.common.interfaces.dto.base.IdRespBody;
 import com.platenogroup.apigateway.common.interfaces.dto.base.RequestDto;
-import com.platenogroup.apigateway.common.interfaces.dto.base.ResponseBody;
 import com.platenogroup.apigateway.common.interfaces.dto.base.ResponseDto;
 import com.platenogroup.apigateway.portal.application.assembler.ApiAssembler;
 import com.platenogroup.apigateway.portal.application.service.ApiService;
