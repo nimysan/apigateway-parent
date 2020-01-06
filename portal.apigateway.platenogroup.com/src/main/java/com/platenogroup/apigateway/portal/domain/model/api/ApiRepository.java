@@ -16,7 +16,7 @@ import org.springframework.data.repository.CrudRepository;
  */
 public interface ApiRepository extends CrudRepository<Api, String> {
 
-	Optional<Api> findByName(String id);
+	Optional<Api> findByName(String name);
 
 	@Query("select DISTINCT api from Api api left join api.tags as tag where tag.tagValue = ?1") // 正确
 	Iterable<Api> findAllByTags(String tag);

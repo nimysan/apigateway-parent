@@ -18,7 +18,6 @@ public class ApiRouteDefinition implements ValueObject<ApiRouteDefinition> {
 
 	@Override
 	public boolean sameValueAs(ApiRouteDefinition other) {
-		// TODO
 		return false;
 	}
 
