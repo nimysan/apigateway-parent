@@ -17,4 +17,5 @@ public interface ApiRepository extends CrudRepository<Api, String> {
 
 	Optional<Api> findByName(String id);
 
+	Iterable<Api> findAllByTags(SimpleTag tag);
 }

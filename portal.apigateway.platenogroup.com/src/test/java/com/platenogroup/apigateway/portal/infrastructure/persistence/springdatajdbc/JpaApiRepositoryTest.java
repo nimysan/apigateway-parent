@@ -54,12 +54,29 @@ public class JpaApiRepositoryTest {
 	}
 
 	@Test
+	public void testFindApiByTag() {
+		Api api1 = sampleWithName("api1");
+		Api api2 = sampleWithName("api2");
+		Api api3 = sampleWithName("api3");
+
+		api2.addTag("test-tag");
+		api3.addTag("test-tag");
+
+		apiRepository.save(api1);
+		apiRepository.save(api2);
+		apiRepository.save(api3);
+
+		Iterable<Api> findAllByTag = apiRepository.findAllByTags(new SimpleTag("test-tag"));
+		findAllByTag.forEach(System.out::println);
+	}
+
+	@Test
 	public void testDeactiveApi() {
 		apiRepository.save(testPublicApi);
 		Api api = apiRepository.findById(testPublicApi.getId()).get();
 		api.deactive();
 		apiRepository.save(testPublicApi);
-		
+
 		Optional<Api> findByName = apiRepository.findByName(testPublicApi.getName());
 		Api deactiveApi = findByName.get();
 		assertThat(deactiveApi.getName()).isEqualTo(testPublicApi.getName());
@@ -76,6 +93,11 @@ public class JpaApiRepositoryTest {
 
 	private Api sample() {
 		Api api = new Api("test", "http", "www.baidu.com", 80, "/test");
+		return api;
+	}
+
+	private Api sampleWithName(String name) {
+		Api api = new Api(name, "http", "www.baidu.com", 80, "/test");
 		return api;
 	}
 
