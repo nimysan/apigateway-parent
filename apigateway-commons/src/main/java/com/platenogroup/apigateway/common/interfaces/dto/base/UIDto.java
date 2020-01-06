@@ -5,6 +5,6 @@ package com.platenogroup.apigateway.common.interfaces.dto.base;
  * @author daoqidelv
  * @createdate 2017年9月24日
  */
-public interface UIDto {
+public interface UIDto<T> {
 
 }

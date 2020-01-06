@@ -2,28 +2,30 @@ package com.platenogroup.apigateway.common.interfaces.dto.base;
 
 import javax.validation.Valid;
 
+
 /**
  * 请求dto
+ * 
  * @author daoqidelv
  * @createdate 2017年10月15日
  * @param <T>
  */
 public class RequestDto<T> implements UIDto {
-	
+
 	/**
 	 * 请求渠道
 	 */
 	private String channel;
-	
+
 	/**
 	 * 请求id
 	 */
 	private String requestId;
-	
+
 	/**
 	 * 对body使用validation
 	 */
-	@Valid 
+	@Valid
 	private T body;
 
 	public String getChannel() {
@@ -42,7 +44,6 @@ public class RequestDto<T> implements UIDto {
 		this.requestId = requestId;
 	}
 
-
 	public T getBody() {
 		return body;
 	}
@@ -50,5 +51,5 @@ public class RequestDto<T> implements UIDto {
 	public void setBody(T body) {
 		this.body = body;
 	}
-	
+
 }

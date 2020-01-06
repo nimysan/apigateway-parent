@@ -10,11 +10,13 @@ import org.springframework.web.bind.annotation.RestController;
 import com.platenogroup.apigateway.common.interfaces.dto.base.IdRespBody;
 import com.platenogroup.apigateway.common.interfaces.dto.base.RequestDto;
 import com.platenogroup.apigateway.common.interfaces.dto.base.ResponseDto;
-import com.platenogroup.apigateway.portal.application.assembler.ApiAssembler;
 import com.platenogroup.apigateway.portal.application.service.ApiService;
+import com.platenogroup.apigateway.portal.domain.model.api.Api;
 import com.platenogroup.apigateway.portal.interfaces.controller.base.BaseController;
+import com.platenogroup.apigateway.portal.interfaces.dto.api.ApiAssembler;
 import com.platenogroup.apigateway.portal.interfaces.dto.api.ApiDetailRespBody;
 import com.platenogroup.apigateway.portal.interfaces.dto.api.ApiDto;
+import com.platenogroup.apigateway.portal.interfaces.dto.api.ApiRespBody;
 
 @RestController
 @RequestMapping("/api")
@@ -40,7 +42,8 @@ public class ApiController extends BaseController {
 	@RequestMapping(value = "/", method = RequestMethod.POST)
 	public ResponseDto createApi(@RequestBody RequestDto<ApiDto> apiDto) {
 		try {
-			IdRespBody addResult = apiService.addApi(apiDto);
+			String addApi = apiService.addApi(apiAssembler.toEntity(apiDto.getBody()));
+			IdRespBody addResult = new IdRespBody(addApi);
 			return this.formatSuccessResponse(addResult);
 		} catch (Exception e) {
 			return this.formatErrorResponse(e);
@@ -59,7 +62,6 @@ public class ApiController extends BaseController {
 
 	@RequestMapping(value = "/{apiName}", method = RequestMethod.GET)
 	public ResponseDto getByName(@PathVariable String apiName) {
-		ApiDetailRespBody byName = apiService.getByName(apiName);
-		return this.formatSuccessResponse(byName);
+		return null;
 	}
 }

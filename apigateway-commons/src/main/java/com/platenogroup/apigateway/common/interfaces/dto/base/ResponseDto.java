@@ -1,26 +1,28 @@
 package com.platenogroup.apigateway.common.interfaces.dto.base;
 
 /**
- * 响应dto
- * @author daoqidelv
- * @createdate 2017年10月15日
+ * Controller的响应DTO
+ * 
+ * @author SeanYe
+ *
+ * @param <T>
  */
-public class ResponseDto implements UIDto{
-	
-    /**
-     * 状态码
-     */
-    private String returnCode;
+public class ResponseDto<T> implements UIDto<T> {
 
-    /**
-     * 提示信息
-     */
-    private String returnMsg;
+	/**
+	 * 状态码
+	 */
+	private String returnCode;
 
-    /**
-     * 各个接口返回的数据
-     */
-    private Object body;
+	/**
+	 * 提示信息
+	 */
+	private String returnMsg;
+
+	/**
+	 * 各个接口返回的数据
+	 */
+	private T body;
 
 	public String getReturnCode() {
 		return returnCode;
@@ -38,12 +40,12 @@ public class ResponseDto implements UIDto{
 		this.returnMsg = returnMsg;
 	}
 
-	public Object getBody() {
+	public T getBody() {
 		return body;
 	}
 
-	public void setBody(Object body) {
+	public void setBody(T body) {
 		this.body = body;
 	}
-	
+
 }
