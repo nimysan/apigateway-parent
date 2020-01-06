@@ -66,8 +66,9 @@ public class JpaApiRepositoryTest {
 		apiRepository.save(api2);
 		apiRepository.save(api3);
 
-		Iterable<Api> findAllByTag = apiRepository.findAllByTags(new SimpleTag("test-tag"));
-		findAllByTag.forEach(System.out::println);
+		Iterable<Api> findAllByTag = apiRepository.findAllByTags("test-tag");
+		assertThat(findAllByTag).hasSize(2);
+
 	}
 
 	@Test

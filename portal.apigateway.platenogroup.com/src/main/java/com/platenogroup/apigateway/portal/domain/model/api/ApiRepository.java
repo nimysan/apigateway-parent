@@ -2,6 +2,7 @@ package com.platenogroup.apigateway.portal.domain.model.api;
 
 import java.util.Optional;
 
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
 /**
@@ -17,5 +18,6 @@ public interface ApiRepository extends CrudRepository<Api, String> {
 
 	Optional<Api> findByName(String id);
 
-	Iterable<Api> findAllByTags(SimpleTag tag);
+	@Query("select DISTINCT api from Api api left join api.tags as tag where tag.tagValue = ?1") // 正确
+	Iterable<Api> findAllByTags(String tag);
 }
