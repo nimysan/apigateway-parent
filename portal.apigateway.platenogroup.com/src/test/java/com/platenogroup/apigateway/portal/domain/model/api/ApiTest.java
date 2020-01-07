@@ -3,11 +3,19 @@ package com.platenogroup.apigateway.portal.domain.model.api;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.platform.runner.JUnitPlatform;
 import org.junit.runner.RunWith;
 
+/**
+ * https://www.ibm.com/developerworks/cn/java/j-introducing-junit5-part1-jupiter-api/index.html
+ * 
+ * @author SeanYe
+ *
+ */
 @RunWith(JUnitPlatform.class)
+@DisplayName("API模型测试")
 public class ApiTest {
 
 	@Test

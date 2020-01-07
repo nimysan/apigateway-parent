@@ -19,7 +19,7 @@ import com.platenogroup.apigateway.portal.domain.model.api.SimpleTag;
 
 @RunWith(SpringRunner.class)
 @DataJpaTest
-@Transactional(propagation = Propagation.NOT_SUPPORTED)
+//@Transactional(propagation = Propagation.NOT_SUPPORTED)
 public class JpaApiRepositoryTest {
 
 	/**
@@ -68,6 +68,13 @@ public class JpaApiRepositoryTest {
 
 		Iterable<Api> findAllByTag = apiRepository.findAllByTags("test-tag");
 		assertThat(findAllByTag).hasSize(2);
+
+		Optional<Api> queryApi3 = apiRepository.findByName("api3");
+		queryApi3.get().removeTag("test-tag");
+		apiRepository.save(api3);
+
+		Iterable<Api> tagedApi = apiRepository.findAllByTags("test-tag");
+		assertThat(tagedApi).hasSize(1);
 
 	}
 
