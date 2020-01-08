@@ -1,4 +1,4 @@
-package com.platenogroup.apigateway.dispatcher.utils;
+package com.platenogroup.apigateway.dispatcher.infrastructure;
 
 public interface RequestIdGenerator {
 

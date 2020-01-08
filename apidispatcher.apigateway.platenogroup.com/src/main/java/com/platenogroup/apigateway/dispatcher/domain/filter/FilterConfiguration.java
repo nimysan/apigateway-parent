@@ -1,4 +1,4 @@
-package com.platenogroup.apigateway.dispatcher.filter;
+package com.platenogroup.apigateway.dispatcher.domain.filter;
 
 import java.security.Principal;
 import java.util.UUID;
@@ -13,12 +13,12 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpHeaders;
 import org.springframework.web.server.ServerWebExchange;
 
-import com.platenogroup.apigateway.dispatcher.utils.RequestIdGenerator;
+import com.platenogroup.apigateway.dispatcher.infrastructure.RequestIdGenerator;
 
 import reactor.core.publisher.Mono;
 
 @Configuration
-public class FilterConfig {
+public class FilterConfiguration {
 
 	public static final String X_PNG_REQUEST_ID = "x-png-request-id";
 

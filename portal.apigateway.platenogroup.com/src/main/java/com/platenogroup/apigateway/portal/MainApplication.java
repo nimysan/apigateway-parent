@@ -2,6 +2,9 @@ package com.platenogroup.apigateway.portal;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Import;
+
+import com.platenogroup.apigateway.portal.interfaces.controller.base.BaseController;
 
 /**
  * 影响mockMvc等一些单元测试的问题解决方案：
