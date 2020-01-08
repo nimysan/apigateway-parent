@@ -17,8 +17,16 @@ spring:
             - Path=/api/sample2
           filters:
             - StripPrefix=1
-          uri: "http://ip.tianqiapi.com/?ip=27.193.13.255,123.125.71.38)"
-          
+          uri: "http://ip.tianqiapi.com/?ip=27.193.13.255,123.125.71.38)"      forwarded:        enabled: false 
+#redis  redis:    host: 127.0.0.1
+    database: 0
+    port: 6379
+    password: 
+    timeout: 0
+    jedis:      pool:        max-idle: 8
+        max-wait: 1
+        max-active: 8
+        min-idle: 0
 #static route
 #ops
 management:
