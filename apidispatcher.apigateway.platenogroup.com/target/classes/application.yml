@@ -4,6 +4,8 @@ server:
 logging:  level:    org.springframework.cloud.gateway: trace
     
 spring:
+  rabbitmq:    username: javauser
+    password: 123456
   cloud:
     gateway:
       routes: 

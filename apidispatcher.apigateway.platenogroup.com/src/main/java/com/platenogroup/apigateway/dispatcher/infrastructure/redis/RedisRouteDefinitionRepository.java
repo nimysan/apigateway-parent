@@ -1,4 +1,4 @@
-package com.platenogroup.apigateway.dispatcher.infrastructure;
+package com.platenogroup.apigateway.dispatcher.infrastructure.redis;
 
 import java.net.URI;
 import java.util.ArrayList;

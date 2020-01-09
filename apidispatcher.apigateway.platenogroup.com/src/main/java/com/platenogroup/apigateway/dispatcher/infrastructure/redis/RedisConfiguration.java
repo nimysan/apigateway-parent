@@ -1,4 +1,4 @@
-package com.platenogroup.apigateway.dispatcher.infrastructure;
+package com.platenogroup.apigateway.dispatcher.infrastructure.redis;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
