@@ -1,4 +1,4 @@
-package com.platenogroup.apigateway.dispatcher.infrastructure.rabbitmq;
+package com.platenogroup.apigateway.dispatcher.interfaces.amqp;
 
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
@@ -6,9 +6,12 @@ import java.util.concurrent.CountDownLatch;
 
 import org.springframework.amqp.rabbit.annotation.RabbitHandler;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.messaging.support.GenericMessage;
 import org.springframework.stereotype.Component;
+
+import com.platenogroup.apigateway.dispatcher.domain.service.RouteRuleService;
 
 /**
  * 使用SPEL表达式，动态使用QUEUE name
@@ -18,15 +21,19 @@ import org.springframework.stereotype.Component;
  */
 @Component
 @RabbitListener(queues = "#{refersh_route_queue.name}")
-public class RabbitMqMessageConsumer {
+public class RouteRuleRefreshListener {
 
 	public static final Charset CHARSET = StandardCharsets.UTF_8;
 
 	private CountDownLatch latch = new CountDownLatch(1);
 
+	@Autowired
+	private RouteRuleService routeRuleService;
+
 	@RabbitHandler
 	public void process(String testMessage) {
 		System.out.println("DirectReceiver消费者收到消息  : " + testMessage);
+		routeRuleService.refreshRoutes();
 	}
 
 	@RabbitHandler
@@ -37,12 +44,13 @@ public class RabbitMqMessageConsumer {
 			bs[i] = payload[i].byteValue();
 		}
 		System.out.println("processByteMessage消费者收到消息  : " + new String(bs, CHARSET));
+		routeRuleService.refreshRoutes();
 	}
 
 	@RabbitHandler
 	public void process_byteMessages(byte[] result) {
 		System.out.println("process_byteMessages消费者收到消息  : " + new String(result, CHARSET));
-
+		routeRuleService.refreshRoutes();
 	}
 
 	public CountDownLatch getLatch() {
