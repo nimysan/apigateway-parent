@@ -11,14 +11,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.platenogroup.apigateway.common.interfaces.dto.base.PngCommonRestResponse;
 import com.platenogroup.apigateway.common.interfaces.dto.base.PngRestBuilder;
-import com.platenogroup.apigateway.common.interfaces.rest.BaseRestController;
+import com.platenogroup.apigateway.common.interfaces.rest.ControllerForTest;
 import com.platenogroup.apigateway.portal.application.service.ApiService;
 import com.platenogroup.apigateway.portal.interfaces.dto.api.ApiAssembler;
 import com.platenogroup.apigateway.portal.interfaces.dto.api.ApiDto;
 
 @RestController
 @RequestMapping("/api")
-public class ApiController extends BaseRestController {
+public class ApiController extends ControllerForTest {
 
 	@Autowired
 	public ApiService apiService;

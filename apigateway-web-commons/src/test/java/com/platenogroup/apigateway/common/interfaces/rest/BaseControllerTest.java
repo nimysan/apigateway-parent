@@ -16,7 +16,7 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import com.platenogroup.apigateway.common.constants.ReturnCode;
 
-@WebMvcTest(BaseRestController.class)
+@WebMvcTest(ControllerForTest.class)
 @RunWith(JUnitPlatform.class)
 class BaseControllerTest {
 

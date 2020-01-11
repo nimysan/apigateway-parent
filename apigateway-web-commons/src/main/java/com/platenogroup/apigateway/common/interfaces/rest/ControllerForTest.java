@@ -9,7 +9,7 @@ import com.platenogroup.apigateway.common.interfaces.dto.base.PngCommonRestRespo
 import com.platenogroup.apigateway.common.interfaces.dto.base.PngRestBuilder;
 
 @RestController
-public class BaseRestController {
+public class ControllerForTest {
 
 	/**
 	 * 请不要删除，这是用于标识内部逻辑实现存在异常的情况下的
