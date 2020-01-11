@@ -28,6 +28,10 @@ public class PngRestBuilder {
 		return new PngCommonRestResponse(ReturnCode.SUCCESS, EMPTY_MESSAGE, body);
 	}
 
+	public PngCommonRestResponse okAsEmpty() {
+		return new PngCommonRestResponse(ReturnCode.SUCCESS, EMPTY_MESSAGE, EMPTY_BODY);
+	}
+
 	public PngCommonRestResponse failWithCode(String code) {
 		return new PngCommonRestResponse(code, getCodeDescription(code), EMPTY_BODY);
 	}

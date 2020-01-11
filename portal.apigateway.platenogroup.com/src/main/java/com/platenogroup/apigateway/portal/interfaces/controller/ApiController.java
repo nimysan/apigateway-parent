@@ -1,8 +1,5 @@
 package com.platenogroup.apigateway.portal.interfaces.controller;
 
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,20 +9,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.platenogroup.apigateway.common.interfaces.dto.base.IdRespBody;
-import com.platenogroup.apigateway.common.interfaces.dto.base.RequestDto;
-import com.platenogroup.apigateway.common.interfaces.dto.base.ResponseBody;
 import com.platenogroup.apigateway.common.interfaces.dto.base.PngCommonRestResponse;
+import com.platenogroup.apigateway.common.interfaces.dto.base.PngRestBuilder;
+import com.platenogroup.apigateway.common.interfaces.rest.BaseRestController;
 import com.platenogroup.apigateway.portal.application.service.ApiService;
-import com.platenogroup.apigateway.portal.domain.model.api.Api;
-import com.platenogroup.apigateway.portal.interfaces.controller.base.BaseController;
 import com.platenogroup.apigateway.portal.interfaces.dto.api.ApiAssembler;
 import com.platenogroup.apigateway.portal.interfaces.dto.api.ApiDto;
-import com.platenogroup.apigateway.portal.interfaces.dto.api.ApiRespBody;
 
 @RestController
 @RequestMapping("/api")
-public class ApiController extends BaseController {
+public class ApiController extends BaseRestController {
 
 	@Autowired
 	public ApiService apiService;
@@ -45,37 +38,20 @@ public class ApiController extends BaseController {
 	 * @return
 	 */
 	@RequestMapping(value = "/", method = RequestMethod.POST)
-	public PngCommonRestResponse createApi(@RequestBody RequestDto<ApiDto> apiDto) {
-		try {
-			String addApi = apiService.addApi(apiAssembler.toEntity(apiDto.getBody()));
-			IdRespBody addResult = new IdRespBody(addApi);
-			return this.formatSuccessResponse(addResult);
-		} catch (Exception e) {
-			e.printStackTrace();
-			return this.formatErrorResponse(e);
-		}
+	public PngCommonRestResponse createApi(@RequestBody ApiDto apiDto) throws Exception {
+		String addApi = apiService.addApi(apiAssembler.toEntity(apiDto));
+		return PngRestBuilder.newBuilder().ok(addApi);
 	}
 
 	@RequestMapping(value = "/deactive/{apiName}", method = RequestMethod.PUT)
 	public PngCommonRestResponse deactive(@PathVariable String apiName) {
-		try {
-			apiService.deactive(apiName);
-			return this.formatSuccessResponse(new IdRespBody(apiName));
-		} catch (Exception e) {
-			return this.formatErrorResponse(e);
-		}
+		return PngRestBuilder.newBuilder().okAsEmpty();
 	}
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public PngCommonRestResponse listAll() {
-		try {
-			Collection<Api> listAll = apiService.listAll();
-			ResponseBody x = new ResponseBody();
-			x.setBody(listAll.stream().map(api -> apiAssembler.assembleQueryDetail(api)).collect(Collectors.toList()));
-			return this.formatSuccessResponse(x);
-		} catch (Exception e) {
-			return this.formatErrorResponse(e);
-		}
+	public PngCommonRestResponse listAll() throws Exception {
+		return PngRestBuilder.newBuilder().ok(apiService.listAll().stream()
+				.map(api -> apiAssembler.assembleQueryDetail(api)).collect(Collectors.toList()));
 	}
 
 	@RequestMapping(value = "/{apiName}", method = RequestMethod.GET)

@@ -3,9 +3,7 @@ package com.platenogroup.apigateway.portal.interfaces.controller;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.doThrow;
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -13,11 +11,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.context.ApplicationContext;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
@@ -25,16 +21,12 @@ import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.ResultMatcher;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
-import com.alibaba.fastjson.JSON;
-import com.platenogroup.apigateway.common.interfaces.dto.base.IdRespBody;
-import com.platenogroup.apigateway.common.interfaces.dto.base.RequestDto;
+import com.platenogroup.apigateway.common.constants.ReturnCode;
 import com.platenogroup.apigateway.portal.application.service.ApiService;
 import com.platenogroup.apigateway.portal.infrastructure.exception.BusinessException;
 import com.platenogroup.apigateway.portal.infrastructure.exception.ExceptionHandler;
 import com.platenogroup.apigateway.portal.infrastructure.util.ApplicationUtil;
 import com.platenogroup.apigateway.portal.interfaces.dto.api.ApiAssembler;
-import com.platenogroup.apigateway.portal.interfaces.dto.api.ApiDetailRespBody;
-import com.platenogroup.apigateway.portal.interfaces.dto.api.ApiDto;
 
 @RunWith(SpringRunner.class)
 @WebMvcTest(ApiController.class)
@@ -47,20 +39,11 @@ public class ApiControllerUnitTests {
 	@Autowired
 	private ApiService apiService;
 
-	@Autowired
-	private ApiController controller;
-
 	/**
 	 * 为了测试，真的是什么都能干的出来
 	 */
 	@Before
 	public void setUp() {
-		ApplicationUtil au = new ApplicationUtil();
-		au.setApplicationContext(mock(ApplicationContext.class));
-		controller.setApplicationUtil(au);
-		ExceptionHandler exceptionHandler = new ExceptionHandler();
-		exceptionHandler.setApplicationUtil(au);
-		controller.setExceptionHandler(exceptionHandler);
 	}
 
 	@Test
@@ -85,7 +68,7 @@ public class ApiControllerUnitTests {
 		BusinessException businessException = new BusinessException("9000", "Api Does not exist");
 		doThrow(businessException).when(apiService).deactive("test");
 		mvc.perform(MockMvcRequestBuilders.put("/api/deactive/test")).andDo(print()).andExpect(status().isOk())
-				.andExpect(jsonPath("$.returnCode", is("9000")));
+				.andExpect(jsonPath("$.code", is(ReturnCode.UNKNOWN_ERROR)));
 		verify(apiService).deactive("test");
 	}
 
@@ -110,15 +93,15 @@ public class ApiControllerUnitTests {
 //				.andDo(print()).andExpect(status().isOk()).andExpect(jsonPath("$.returnCode", is("9000")));
 //	}
 
-	private RequestDto<ApiDto> createApiDao(String apiName) {
-		RequestDto<ApiDto> rd = new RequestDto<ApiDto>();
-		rd.setRequestId("123");
-		rd.setChannel("test");
-		ApiDto body = new ApiDto("1", "2", "3", "4", "5", "6");
-		body.setName(apiName);
-		rd.setBody(body);
-		return rd;
-	}
+//	private RequestDto<ApiDto> createApiDao(String apiName) {
+//		RequestDto<ApiDto> rd = new RequestDto<ApiDto>();
+//		rd.setRequestId("123");
+//		rd.setChannel("test");
+//		ApiDto body = new ApiDto("1", "2", "3", "4", "5", "6");
+//		body.setName(apiName);
+//		rd.setBody(body);
+//		return rd;
+//	}
 
 //	@Test
 //	public void getByName() throws Exception {

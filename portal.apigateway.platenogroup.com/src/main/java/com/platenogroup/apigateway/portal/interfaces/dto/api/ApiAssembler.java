@@ -7,7 +7,7 @@ import com.platenogroup.apigateway.portal.domain.model.api.Api;
 @Component
 public class ApiAssembler {
 
-	public ApiRespBody assembleQueryDetail(Api api) {
+	public ApiRespDto assembleQueryDetail(Api api) {
 		return null;
 	}
 
