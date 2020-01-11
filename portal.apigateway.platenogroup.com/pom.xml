@@ -55,7 +55,7 @@
 
 		<dependency>
 			<groupId>apigateway.platenogroup.com</groupId>
-			<artifactId>apigateway-commons</artifactId>
+			<artifactId>apigateway-web-commons</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 

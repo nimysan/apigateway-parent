@@ -11,9 +11,8 @@
 	<modules>
 		<module>apidispatcher.apigateway.platenogroup.com</module>
 		<module>portal.apigateway.platenogroup.com</module>
-		<module>apigateway-commons</module>
+		<module>apigateway-web-commons</module>
 	</modules>
-
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<encoding>UTF-8</encoding>
