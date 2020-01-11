@@ -54,7 +54,8 @@ public class ApplicationUtil implements ApplicationContextAware {
 		} catch (Exception e) {
 			logger.warn("找不到该错误码对应的提示信息,key=" + returnCode, e);
 		}
-		return applicationContext.getMessage(ReturnCode.UNKNOWN_ERROR, null, new Locale(localeLang, localeCountry));
+		return "未知错误[" + returnCode + "]";// applicationContext.getMessage(ReturnCode.UNKNOWN_ERROR, null, new
+		// Locale(localeLang, localeCountry));
 	}
 
 	/**

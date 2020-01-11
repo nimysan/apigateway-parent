@@ -114,7 +114,7 @@ public class ApiControllerUnitTests {
 		RequestDto<ApiDto> rd = new RequestDto<ApiDto>();
 		rd.setRequestId("123");
 		rd.setChannel("test");
-		ApiDto body = new ApiDto();
+		ApiDto body = new ApiDto("1", "2", "3", "4", "5", "6");
 		body.setName(apiName);
 		rd.setBody(body);
 		return rd;

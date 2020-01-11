@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.platenogroup.apigateway.common.constants.ReturnCode;
 import com.platenogroup.apigateway.common.interfaces.dto.base.ResponseBody;
-import com.platenogroup.apigateway.common.interfaces.dto.base.ResponseDto;
+import com.platenogroup.apigateway.common.interfaces.dto.base.PngCommonRestResponse;
 import com.platenogroup.apigateway.portal.infrastructure.exception.ExceptionHandler;
 import com.platenogroup.apigateway.portal.infrastructure.util.ApplicationUtil;
 
@@ -17,6 +17,8 @@ import com.platenogroup.apigateway.portal.infrastructure.util.ApplicationUtil;
  * 
  */
 public class BaseController {
+	
+	
 
 	private static Logger logger = LogManager.getLogger(BaseController.class);
 
@@ -40,8 +42,8 @@ public class BaseController {
 	 * @param e
 	 * @return
 	 */
-	protected ResponseDto formatErrorResponse(final Exception e) {
-		ResponseDto responseDto = new ResponseDto();
+	protected PngCommonRestResponse formatErrorResponse(final Exception e) {
+		PngCommonRestResponse responseDto = new PngCommonRestResponse();
 		// 将response 的data body置为空
 		responseDto.setBody(null);
 
@@ -59,8 +61,8 @@ public class BaseController {
 	 * @param responseBody
 	 * @return ResponseDto
 	 */
-	protected ResponseDto formatSuccessResponse(ResponseBody responseBody) {
-		ResponseDto responseDto = new ResponseDto();
+	protected PngCommonRestResponse formatSuccessResponse(ResponseBody responseBody) {
+		PngCommonRestResponse responseDto = new PngCommonRestResponse();
 		// 设置返回码和返回信息为成功
 		responseDto.setReturnCode(ReturnCode.SUCCESS);
 		responseDto.setReturnMsg(applicationUtil.getReturnMsg(ReturnCode.SUCCESS));

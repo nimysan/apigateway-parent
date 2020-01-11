@@ -11,8 +11,10 @@ public class ApiAssembler {
 		return null;
 	}
 
-	public Api toEntity(ApiDto body) {
-		return null;
+	public Api toEntity(ApiDto apiDto) {
+		Api api = new Api(apiDto.getName(), apiDto.getDescription(), apiDto.getDestHost(), apiDto.getDestPath(),
+				apiDto.getProxyMethod());
+		return api;
 	}
 
 }

@@ -28,7 +28,7 @@ public class JpaApiRepositoryTest {
 	@Before
 	public void setUp() {
 		// 这是一个可以实际跑起来的API，详情参见： https://github.com/davemachado/public-api
-		testPublicApi = new Api("GitHub公共API获取，用于测试", "https", "api.publicapis.org", 80, "/entries");
+		testPublicApi = new Api("test", "a test api", "http://www.baidu.com", "/test", "GET");
 	}
 
 	@Autowired
@@ -100,12 +100,12 @@ public class JpaApiRepositoryTest {
 	}
 
 	private Api sample() {
-		Api api = new Api("test", "http", "www.baidu.com", 80, "/test");
+		Api api = new Api("test", "a test api", "http://www.baidu.com", "/test", "GET");
 		return api;
 	}
 
 	private Api sampleWithName(String name) {
-		Api api = new Api(name, "http", "www.baidu.com", 80, "/test");
+		Api api = new Api(name, "a test api", "http://www.baidu.com", "/test", "GET");
 		return api;
 	}
 

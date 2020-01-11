@@ -12,7 +12,7 @@ public class ApiRouteDefinition implements ValueObject<ApiRouteDefinition> {
 
 	private static final long serialVersionUID = 6163471931412740722L;
 
-	private String upstreamPath;
+	private String downstreamHost;
 	private String downstreamPath;
 	private String method;
 
@@ -21,12 +21,12 @@ public class ApiRouteDefinition implements ValueObject<ApiRouteDefinition> {
 		return false;
 	}
 
-	public String getUpstreamPath() {
-		return upstreamPath;
+	public String getDownstreamHost() {
+		return downstreamHost;
 	}
 
-	public void setUpstreamPath(String upstreamPath) {
-		this.upstreamPath = upstreamPath;
+	public void setDownstreamHost(String downstreamHost) {
+		this.downstreamHost = downstreamHost;
 	}
 
 	public String getDownstreamPath() {

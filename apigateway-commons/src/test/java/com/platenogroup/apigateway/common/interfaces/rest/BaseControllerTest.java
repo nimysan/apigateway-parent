@@ -14,6 +14,8 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
+import com.platenogroup.apigateway.common.constants.ReturnCode;
+
 @WebMvcTest(BaseRestController.class)
 @RunWith(JUnitPlatform.class)
 class BaseControllerTest {
@@ -28,7 +30,7 @@ class BaseControllerTest {
 	@Test
 	void verifyNormalResponse() throws Exception {
 		mvc.perform(MockMvcRequestBuilders.get("/sample/normal")).andDo(print()).andExpect(status().isOk())
-				.andExpect(jsonPath("$.returnCode").value("00000")).andExpect(jsonPath("$.body.a").value("av"));
+				.andExpect(jsonPath("$.code").value(ReturnCode.SUCCESS)).andExpect(jsonPath("$.body.a").value("av"));
 	}
 
 	@Test
@@ -40,8 +42,8 @@ class BaseControllerTest {
 	@Test
 	void verifyArgumentMissing() throws Exception {
 		mvc.perform(MockMvcRequestBuilders.get("/sample/argmissing")).andDo(print()).andExpect(status().isOk())
-				.andExpect(jsonPath("$.returnCode").value("1234"))
-				.andExpect(jsonPath("$.returnMsg").value("Required String parameter 'a1' is not present"));
+				.andExpect(jsonPath("$.code").value(ReturnCode.UNKNOWN_ERROR));
+//				.andExpect(jsonPath("$.message").value("Required String parameter 'a1' is not present"));
 	}
 
 	@Test

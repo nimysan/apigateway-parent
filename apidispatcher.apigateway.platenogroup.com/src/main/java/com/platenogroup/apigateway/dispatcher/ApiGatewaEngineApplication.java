@@ -14,10 +14,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  *
  */
 @SpringBootApplication
-public class GatewayEngineApplication {
+public class ApiGatewaEngineApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(GatewayEngineApplication.class, args);
+		SpringApplication.run(ApiGatewaEngineApplication.class, args);
 	}
 
 }

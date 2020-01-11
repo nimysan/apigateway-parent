@@ -1,5 +1,7 @@
 package com.platenogroup.apigateway.portal.domain.model.api;
 
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -14,7 +16,10 @@ import javax.persistence.OneToMany;
 
 import org.apache.commons.lang.Validate;
 import org.hibernate.annotations.GenericGenerator;
+import org.springframework.data.domain.DomainEvents;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import org.springframework.transaction.event.TransactionPhase;
+import org.springframework.transaction.event.TransactionalEventListener;
 
 import com.google.common.collect.ImmutableSet;
 import com.platenogroup.apigateway.portal.constants.CommonConstants;
@@ -64,9 +69,6 @@ public class Api implements Entity<Api> {
 	private String name;
 	private String description;
 	private int retries = 5; // default
-	private String protocol; // default HTTP
-	private String host;
-	private int port = 80;
 	private String path; // default PATH
 	private byte state = 0; // 0 active 1 not active
 
@@ -88,17 +90,16 @@ public class Api implements Entity<Api> {
 		return ImmutableSet.copyOf(tags);
 	}
 
-	public Api(String name, String protocol, String host, int port, String path) {
+	public Api(String name, String description, String uri, String path, String callMethod) {
 		Validate.notNull(name);
-		Validate.notNull(protocol, "protocol can not be null");
-		Validate.notNull(path, "path can not be null");
-		Validate.notNull(host, "host can not be null");
-
+		Validate.notNull(uri, "target uri can not be null");
+		Validate.notNull(path, "target path can not be null");
 		this.name = name;
-		this.protocol = protocol;
-		this.port = port;
-		this.path = path;
-		this.host = host;
+		this.description = description;
+		this.route = new ApiRouteDefinition();
+		this.route.setDownstreamHost(uri);
+		this.route.setDownstreamPath(path);
+		this.route.setMethod(callMethod);
 	}
 
 	/**
@@ -164,30 +165,6 @@ public class Api implements Entity<Api> {
 
 	public void setRetries(int retries) {
 		this.retries = retries;
-	}
-
-	public String getProtocol() {
-		return protocol;
-	}
-
-	public void setProtocol(String protocol) {
-		this.protocol = protocol;
-	}
-
-	public String getHost() {
-		return host;
-	}
-
-	public void setHost(String host) {
-		this.host = host;
-	}
-
-	public int getPort() {
-		return port;
-	}
-
-	public void setPort(int port) {
-		this.port = port;
 	}
 
 	public String getPath() {
@@ -257,6 +234,17 @@ public class Api implements Entity<Api> {
 			return;
 		}
 		tags.remove(new SimpleTag(string));
+	}
+
+	@DomainEvents
+	public Collection<ApiSaveEvent> saveEvents() {
+		return Arrays.asList(new ApiSaveEvent(this.id));
+	}
+
+	// 接受User发出的类型为UserSaveEvent的DomainEvents事件
+	@TransactionalEventListener(phase = TransactionPhase.AFTER_COMMIT)
+	public void event(ApiSaveEvent event) {
+		System.out.println("Event" + event);
 	}
 
 }

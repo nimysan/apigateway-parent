@@ -20,16 +20,16 @@ public class ApiTest {
 
 	@Test
 	public void sameNameShouldSameApi() {
-		Api api = new Api("test", "http", "www.baidu.com", 80, "/test");
-		Api api2 = new Api("test1", "http", "www.google.com", 80, "/test");
-		Api api3 = new Api("test", "http", "www.google.com", 80, "/test");
+		Api api = new Api("test", "a test api", "http://www.baidu.com", "/test", "GET");
+		Api api2 = new Api("test1", "a test api", "http://www.google.com", "/test", "POST");
+		Api api3 = new Api("test", "a test api", "http://www.google.com", "/test", "GET");
 		assertThat(api.sameIdentityAs(api2)).isFalse();
 		assertThat(api.sameIdentityAs(api3)).isTrue();
 	}
 
 	@Test
 	public void testCreateApiWithoutRoute() {
-		Api api = new Api("test", "http", "www.baidu.com", 80, "/test");
+		Api api = new Api("test", "a test api", "http://www.baidu.com", "/test", "GET");
 		assertThat(api.getName()).isNotNull();
 		assertThat(api.getName()).isEqualTo("test");
 	}
@@ -53,7 +53,7 @@ public class ApiTest {
 	}
 
 	private Api getSampleApi() {
-		Api api = new Api("test", "http", "www.baidu.com", 80, "/test");
+		Api api = new Api("test", "a test api", "http://www.baidu.com", "/test", "GET");
 		return api;
 	}
 
