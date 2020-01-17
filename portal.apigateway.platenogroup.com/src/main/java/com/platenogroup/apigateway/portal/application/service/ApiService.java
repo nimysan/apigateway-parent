@@ -4,7 +4,6 @@ import java.util.Collection;
 import java.util.Optional;
 
 import com.platenogroup.apigateway.portal.domain.model.api.Api;
-import com.platenogroup.apigateway.portal.infrastructure.exception.BusinessException;
 
 /**
  * 1. This is Application Service。 输入输出可以是interface层的类和对象，
@@ -15,14 +14,14 @@ import com.platenogroup.apigateway.portal.infrastructure.exception.BusinessExcep
  */
 public interface ApiService {
 
-	public Optional<Api> getByName(String apiName) throws BusinessException;
+	public Optional<Api> getByName(String apiName);
 
-	public String addApi(Api api) throws BusinessException;
+	public String addApi(Api api);
 
-	public Collection<Api> listAll() throws BusinessException;
+	public Collection<Api> listAll();
 
-	public void deleteApi(String apiId) throws BusinessException;
+	public void deleteApi(String apiId);
 
-	public void deactive(String apiName) throws BusinessException;
+	public void deactive(String apiName);
 
 }

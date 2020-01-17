@@ -8,7 +8,12 @@ import com.platenogroup.apigateway.portal.domain.model.api.Api;
 public class ApiAssembler {
 
 	public ApiRespDto assembleQueryDetail(Api api) {
-		return null;
+		ApiRespDto dto = new ApiRespDto();
+		dto.setDescription(api.getDescription());
+		dto.setId(api.getId());
+		dto.setName(api.getName());
+		dto.setDownstreamDefinition(api.getRoute().toString());
+		return dto;
 	}
 
 	public Api toEntity(ApiDto apiDto) {

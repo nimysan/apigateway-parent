@@ -3,8 +3,15 @@
 #### 网关添加
 
 ```
-curl -X POST -d '{"requestId":"ssssss","channel":"curl","body":{"name":"get_employee_salary_report","description":"fetch employee detail salary","supportMethods":"GET","destHost":"http://shr.platenogroup/xxxxx","destPath":"/hr/salary/report","proxyMethod":"POST"}}
-'  -H 'Content-Type: application/json'  "http://localhost:7090/api/"
+curl -X POST -d '{"name":"3-get_employee_salary_report","description":"fetch employee detail salary","supportMethods":"GET","destHost":"http://shr.platenogroup/xxxxx","destPath":"/hr/salary/report","proxyMethod":"POST"}'  -H 'Content-Type: application/json'  "http://localhost:7090/api/"
+
+```
+
+#### 网关封存
+
+```
+curl -X DELETE "http://localhost:7090/api/deactive/3-get_employee_salary_report"
+
 ```
 
 

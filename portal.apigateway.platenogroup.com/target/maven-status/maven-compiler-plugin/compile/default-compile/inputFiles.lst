@@ -1,11 +1,9 @@
 D:\eclipse-workspace\apigateway-parent\portal.apigateway.platenogroup.com\src\main\java\com\platenogroup\apigateway\portal\domain\model\api\SimpleTag.java
-D:\eclipse-workspace\apigateway-parent\portal.apigateway.platenogroup.com\src\main\java\com\platenogroup\apigateway\portal\interfaces\dto\api\ApiDetailRespBody.java
 D:\eclipse-workspace\apigateway-parent\portal.apigateway.platenogroup.com\src\main\java\com\platenogroup\apigateway\portal\domain\model\api\Api.java
 D:\eclipse-workspace\apigateway-parent\portal.apigateway.platenogroup.com\src\main\java\com\platenogroup\apigateway\portal\domain\model\api\ApiSaveEvent.java
 D:\eclipse-workspace\apigateway-parent\portal.apigateway.platenogroup.com\src\main\java\com\platenogroup\apigateway\portal\domain\model\api\ApiRouteDefinition.java
 D:\eclipse-workspace\apigateway-parent\portal.apigateway.platenogroup.com\src\main\java\com\platenogroup\apigateway\portal\domain\shared\ValueObject.java
 D:\eclipse-workspace\apigateway-parent\portal.apigateway.platenogroup.com\src\main\java\com\platenogroup\apigateway\portal\domain\model\apiconsumer\ApiConsumerRepository.java
-D:\eclipse-workspace\apigateway-parent\portal.apigateway.platenogroup.com\src\main\java\com\platenogroup\apigateway\portal\interfaces\controller\base\BaseController.java
 D:\eclipse-workspace\apigateway-parent\portal.apigateway.platenogroup.com\src\main\java\com\platenogroup\apigateway\portal\domain\model\apiconsumer\Application.java
 D:\eclipse-workspace\apigateway-parent\portal.apigateway.platenogroup.com\src\main\java\com\platenogroup\apigateway\portal\domain\shared\AbstractSpecification.java
 D:\eclipse-workspace\apigateway-parent\portal.apigateway.platenogroup.com\src\main\java\com\platenogroup\apigateway\portal\domain\shared\NotSpecification.java
@@ -29,7 +27,6 @@ D:\eclipse-workspace\apigateway-parent\portal.apigateway.platenogroup.com\src\ma
 D:\eclipse-workspace\apigateway-parent\portal.apigateway.platenogroup.com\src\main\java\com\platenogroup\apigateway\portal\domain\shared\Specification.java
 D:\eclipse-workspace\apigateway-parent\portal.apigateway.platenogroup.com\src\main\java\com\platenogroup\apigateway\portal\infrastructure\id\DistributedIdGenerator.java
 D:\eclipse-workspace\apigateway-parent\portal.apigateway.platenogroup.com\src\main\java\com\platenogroup\apigateway\portal\application\service\ApiService.java
-D:\eclipse-workspace\apigateway-parent\portal.apigateway.platenogroup.com\src\main\java\com\platenogroup\apigateway\portal\interfaces\dto\api\DeleteApiRespBody.java
+D:\eclipse-workspace\apigateway-parent\portal.apigateway.platenogroup.com\src\main\java\com\platenogroup\apigateway\portal\interfaces\dto\api\ApiRespDto.java
 D:\eclipse-workspace\apigateway-parent\portal.apigateway.platenogroup.com\src\main\java\com\platenogroup\apigateway\portal\constants\CommonConstants.java
 D:\eclipse-workspace\apigateway-parent\portal.apigateway.platenogroup.com\src\main\java\com\platenogroup\apigateway\portal\domain\model\api\ApiRepository.java
-D:\eclipse-workspace\apigateway-parent\portal.apigateway.platenogroup.com\src\main\java\com\platenogroup\apigateway\portal\interfaces\dto\api\ApiRespBody.java

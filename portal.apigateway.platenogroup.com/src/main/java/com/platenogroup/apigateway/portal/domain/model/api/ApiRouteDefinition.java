@@ -17,6 +17,12 @@ public class ApiRouteDefinition implements ValueObject<ApiRouteDefinition> {
 	private String method;
 
 	@Override
+	public String toString() {
+		return String.format("ApiRouteDefinition [downstreamHost=%s, downstreamPath=%s, method=%s]", downstreamHost,
+				downstreamPath, method);
+	}
+
+	@Override
 	public boolean sameValueAs(ApiRouteDefinition other) {
 		return false;
 	}
