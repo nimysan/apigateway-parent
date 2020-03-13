@@ -15,6 +15,7 @@ import org.springframework.web.reactive.result.view.ViewResolver;
 
 @Configuration
 public class ExceptionConfiguration {
+
 	@Primary
 	@Bean
 	@Order(Ordered.HIGHEST_PRECEDENCE)

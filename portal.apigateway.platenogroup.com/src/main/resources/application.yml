@@ -1,5 +1,5 @@
 server:
-  port: 7090
+  port: 80
 spring:
   datasource:
     url: jdbc:h2:mem:dbtest

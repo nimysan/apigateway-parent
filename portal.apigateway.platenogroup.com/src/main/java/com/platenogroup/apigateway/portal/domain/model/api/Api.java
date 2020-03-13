@@ -1,250 +1,57 @@
 package com.platenogroup.apigateway.portal.domain.model.api;
 
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Embedded;
-import javax.persistence.EntityListeners;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.validation.constraints.NotNull;
 
-import org.apache.commons.lang.Validate;
-import org.hibernate.annotations.GenericGenerator;
-import org.springframework.data.domain.DomainEvents;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
-import org.springframework.transaction.event.TransactionPhase;
-import org.springframework.transaction.event.TransactionalEventListener;
+import com.platenogroup.apigateway.portal.domain.shared.AggregateRoot;
 
-import com.google.common.collect.ImmutableSet;
-import com.platenogroup.apigateway.portal.constants.CommonConstants;
-import com.platenogroup.apigateway.portal.domain.shared.Entity;
+import lombok.Data;
 
 /**
- * 聚合根 Api。 对外的业务意义就是Service。
- * 
- * <code>
- * <pre>
- * {
-	    "id": "9748f662-7711-4a90-8186-dc02f10eb0f5",
-	    "created_at": 1422386534,
-	    "updated_at": 1422386534,
-	    "name": "my-service",
-	    "retries": 5,
-	    "protocol": "http",
-	    "host": "example.com",
-	    "port": 80,
-	    "path": "/some_api",
-	    "connect_timeout": 60000,
-	    "write_timeout": 60000,
-	    "read_timeout": 60000,
-	    "tags": ["user-level", "low-priority"],
-	    "client_certificate": {"id":"4e3ad2e4-0bc4-4638-8e34-c84a417ba39b"}
-	}
-	</pre>
- * 
- * </code>
- * 
- * 
- * 值对象列表: ApiRoute
- * 
+ * 聚合根
  * 
  * @author SeanYe
  *
  */
-@EntityListeners(AuditingEntityListener.class)
-@javax.persistence.Entity
-public class Api implements Entity<Api> {
+@Data
+@AggregateRoot
+public class Api {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO, generator = CommonConstants.DIST_ID_GENERATOR_NAME)
-	@GenericGenerator(name = CommonConstants.DIST_ID_GENERATOR_NAME, strategy = CommonConstants.DIST_ID_GENERATOR_IMPL)
-	private String id;
+	private long id;
 
 	private String name;
+
+	private String accessPath;
+
+	private List<ApiTag> tags;
+
+	private ApiRouteDefinition routeDefinition;
+
+	private long createdAt;
+
+	private long lastModifiedAt;
+
+	private long createdBy;// 谁创建的API
+
 	private String description;
-	private int retries = 5; // default
-	private String path; // default PATH
-	private byte state = 0; // 0 active 1 not active
 
-	private int connectTimeout = 60000;
-	private int writeTimeout = 60000;
-	private int readTimeout = 60000;
+	/**
+	 * 支持的认证方式
+	 */
+	private List<ApiAuth> auths;
 
-	@OneToMany(cascade = CascadeType.PERSIST, targetEntity = SimpleTag.class, fetch = FetchType.EAGER)
-	private Set<SimpleTag> tags;
+	private int secretLevel; // 私密等級
 
-	@Embedded
-	private ApiRouteDefinition route;
+	private int status = ApiConstants.API_STATUS_ACTIVE; // 当前状态
 
-	public boolean sameIdentityAs(Api other) {
-		return other.getName().contentEquals(this.getName());
-	}
+	public Api(long createdBy, String name, String accessPath, String description) {
 
-	public Set<SimpleTag> getTags() {
-		return ImmutableSet.copyOf(tags);
-	}
-
-	public Api(String name, String description, String uri, String path, String callMethod) {
-		Validate.notNull(name);
-		Validate.notNull(uri, "target uri can not be null");
-		Validate.notNull(path, "target path can not be null");
+		this.createdBy = createdBy;
 		this.name = name;
+		this.accessPath = accessPath;
 		this.description = description;
-		this.route = new ApiRouteDefinition();
-		this.route.setDownstreamHost(uri);
-		this.route.setDownstreamPath(path);
-		this.route.setMethod(callMethod);
-	}
 
-	/**
-	 * 检查一个API是否已经可以使用，如果可以使用，发布ApiReady Event. API转发引擎会将API加入代理系列。
-	 * 
-	 * @return
-	 */
-	public boolean isReady() {
-		if (this.getRoute() == null) {
-			return false;
-		}
-		return this.isActive();
-	}
-
-	/**
-	 * 给当前API添加TAG
-	 * 
-	 * @param tagValue
-	 */
-	public synchronized void addTag(String tagValue) {
-		Validate.notNull(tagValue);
-		SimpleTag tag = new SimpleTag(tagValue);
-		if (tags == null) {
-			tags = new HashSet<SimpleTag>();
-		}
-		tags.add(tag);
-	}
-
-	/**
-	 * 将一个api设置为不可用
-	 */
-	public void deactive() {
-		if (this.state == 0) {
-			this.state = 1;
-			return;
-		}
-		throw new IllegalArgumentException("Api is alreay deative");
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public String getDescription() {
-		return description;
-	}
-
-	public ApiRouteDefinition getRoute() {
-		return route;
-	}
-
-	public String getId() {
-		return id;
-	}
-
-	public void setId(String id) {
-		this.id = id;
-	}
-
-	public int getRetries() {
-		return retries;
-	}
-
-	public void setRetries(int retries) {
-		this.retries = retries;
-	}
-
-	public String getPath() {
-		return path;
-	}
-
-	public void setPath(String path) {
-		this.path = path;
-	}
-
-	public int getConnectTimeout() {
-		return connectTimeout;
-	}
-
-	public void setConnectTimeout(int connectTimeout) {
-		this.connectTimeout = connectTimeout;
-	}
-
-	public int getWriteTimeout() {
-		return writeTimeout;
-	}
-
-	public void setWriteTimeout(int writeTimeout) {
-		this.writeTimeout = writeTimeout;
-	}
-
-	public int getReadTimeout() {
-		return readTimeout;
-	}
-
-	public void setReadTimeout(int readTimeout) {
-		this.readTimeout = readTimeout;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
-	public void setRoute(ApiRouteDefinition route) {
-		this.route = route;
-	}
-
-	public Api() {
-		// spring-data-jpa needed
-	}
-
-	public boolean isActive() {
-		return state == 0;
-	}
-
-	@Override
-	public String toString() {
-		return "Api [id=" + id + ", name=" + name + ", description=" + description + ", route=" + route + "]";
-	}
-
-	/**
-	 * 存在則刪除，不存在不報錯
-	 * 
-	 * @param string
-	 */
-	public void removeTag(String string) {
-		if (tags == null) {
-			return;
-		}
-		tags.remove(new SimpleTag(string));
-	}
-
-	@DomainEvents
-	public Collection<ApiSaveEvent> saveEvents() {
-		return Arrays.asList(new ApiSaveEvent(this.id));
-	}
-
-	// 接受User发出的类型为UserSaveEvent的DomainEvents事件
-	@TransactionalEventListener(phase = TransactionPhase.AFTER_COMMIT)
-	public void event(ApiSaveEvent event) {
-		System.out.println("Event" + event);
 	}
 
 }

@@ -1,25 +1,30 @@
 server:
   port: 7080
 
-logging:  level:    org.springframework.cloud.gateway: trace
+logging:  level:    org.springframework.cloud: trace
+    reactor.netty: trace
+
     
 spring:
   rabbitmq:    username: javauser
     password: 123456
   cloud:
     gateway:
+      httpclient:        wiretap: true
+      httpserver:        wiretap: true
       routes: 
         - predicates:
-            - Path=/api/sample
+            - Path=/api/cny
           filters:
-            - StripPrefix=2
-          uri: "http://ip.tianqiapi.com/?ip=27.193.13.255,123.125.71.38)"
+            - SetPath=/v1/bpi/currentprice/CNY.json
+          uri: "https://api.coindesk.com/v1/bpi/currentprice/CNY.json"
           
         - predicates:
             - Path=/api/sample2
           filters:
-            - StripPrefix=1
-          uri: "http://ip.tianqiapi.com/?ip=27.193.13.255,123.125.71.38)"      forwarded:        enabled: false 
+            - StripPrefix=2
+            - SetPath=/v1/bpi/currentprice/CNY.json
+          uri: "http://www.hehe.com"      forwarded:        enabled: true 
 #redis  redis:    host: 127.0.0.1
     database: 0
     port: 6379
@@ -28,7 +33,7 @@ spring:
     jedis:      pool:        max-idle: 8
         max-wait: 1
         max-active: 8
-        min-idle: 0
+        min-idle: 0  reactor:    stacktrace-mode:      enabled: true
 #static route
 #ops
 management:

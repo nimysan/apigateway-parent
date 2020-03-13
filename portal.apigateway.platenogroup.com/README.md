@@ -1,5 +1,50 @@
 ### ApiGatewayPortal API网关管理入口 
+
 > [Markdown语法](https://www.jianshu.com/p/191d1e21f7ed)
+
+> [参考Kong管理服务方式](https://my.oschina.net/u/4050414/blog/3022358/print)
+
+
+
+１.　添加API
+
+２.　给API设置路由
+
+#### 例子
+
+比特币： https://api.coindesk.com/v1/bpi/currentprice/CNY.json
+
+API访问路径
+
+http://ourhost/api/getcurrentpriceforcnybitcoin need return 
+
+```
+{ 
+	"code":"SA0000",
+	"body":{ 
+		"time":{ 
+				"updated":"Jan 19, 2020 08:13:00 UTC",
+				"updatedISO":"2020-01-19T08:13:00+00:00",
+				"updateduk":"Jan 19, 2020 at 08:13 GMT"
+				},
+		"disclaimer":"This data was produced from the CoinDesk Bitcoin Price Index (USD & CNY respectively).",
+		"bpi":{ 
+				"USD":{ 
+				"code":"USD",
+				"rate":"9,088.0250",
+				"description":"United States Dollar",
+				"rate_float":9088.025
+				},
+		"CNY":{ 
+				"code":"CNY",
+				"rate":"40,202.5000",
+				"description":"Chinese Yuan",
+				"rate_float":40202.5
+			}
+		}
+	}
+}
+```
 #### 网关添加
 
 ```
