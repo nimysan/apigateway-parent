@@ -19,7 +19,7 @@ public class UserController {
 	}
 
 	public void userLogin(@RequestParam String userId, @RequestParam String password) {
-
+		
 	}
 
 }

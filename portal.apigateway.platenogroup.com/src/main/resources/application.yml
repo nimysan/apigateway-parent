@@ -18,3 +18,4 @@ spring:
       path: /h2
 
 logging:  level:    com.platenogroup: debug
+    
