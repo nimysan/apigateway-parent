@@ -24,7 +24,7 @@ public class ApiController {
 	private ApiService apiService;
 
 	@GetMapping
-//	@PreAuthorize("hasAuthority('ROLE_api_consumer')")
+	@PreAuthorize("hasAuthority('ROLE_api_consumer')")
 	public List<ApiDto> list() {
 		return Collections.emptyList();
 	}
@@ -33,7 +33,7 @@ public class ApiController {
 	 * ROLE_前缀必须带 请查看 RoleVoter
 	 */
 	@GetMapping("/sample")
-//	@PreAuthorize("hasAuthority('ROLE_api_creator')")
+	@PreAuthorize("hasAuthority('ROLE_api_creator')")
 	public void createSampleApi() {
 		apiService.addApi("business", "a.b.c");
 		apiService.addApi("business1", "a.b.1");

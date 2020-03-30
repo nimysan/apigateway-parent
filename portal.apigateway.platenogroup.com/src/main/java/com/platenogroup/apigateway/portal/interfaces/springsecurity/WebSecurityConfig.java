@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
+import org.springframework.security.access.expression.SecurityExpressionRoot;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.BeanIds;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -13,13 +14,15 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.logout.LogoutFilter;
 
 import com.platenogroup.apigateway.portal.domain.service.impl.PortalUserPasswordEncoder;
 
 /**
- * Spring security的总配置类
+ * Spring security的总配置类 
+ * 
+ *  @PreAuthroized("hasRole('ROLE_AAA')") 请确保你的有ROLE_前缀，最终比较的代码可以参考 
+ *  @see SecurityExpressionRoot
  */
 @Configuration
 @EnableWebSecurity
@@ -55,20 +58,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				// 设置UserDetailsService 获取user对象
 				.userDetailsService(this.userDetailsService)
 				// 自定义密码验证方法
-				.passwordEncoder(new PasswordEncoder() {
-					// 这个方法没用
-					@Override
-					public String encode(CharSequence charSequence) {
-						return "";
-					}
-
-					// 自定义密码验证方法,charSequence:用户输入的密码，s:我们查出来的数据库密码
-					@Override
-					public boolean matches(CharSequence charSequence, String s) {
-						String pass = MD5Util.string2MD5(charSequence.toString());
-						return s.equals(pass);
-					}
-				});
+				.passwordEncoder(passwordEncoder);
 
 	}
 
