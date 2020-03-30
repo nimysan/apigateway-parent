@@ -1,21 +1,18 @@
-server:
-  port: 80
 spring:
-  datasource:
-    url: jdbc:h2:mem:dbtest
-    username: sa
-    password: sa
-    driver-class-name: org.h2.Driver
-    schema:
-    - classpath*:db/schema.sql
+    datasource:
+        url: jdbc:mysql://localhost:3306/plateno-apigateway?characterEncoding=utf8&useSSL=false&serverTimezone=UTC
+        username: root
+        password:
+    jpa:
+        database: MYSQL
+        show-sql: true
+        hibernate:
+            ddl-auto: create-drop
+        properties:
+            hibernate:
+              dialect: org.hibernate.dialect.MySQL57InnoDBDialect
 
-  jpa:
-    show-sql: true
-    
-  h2:
-    console:
-      enabled: true
-      path: /h2
-
-logging:  level:    com.platenogroup: debug
-    
+logging:
+  level:
+    com.platenogroup.apigateway.portal: debug
+    org.springframework.security: debug

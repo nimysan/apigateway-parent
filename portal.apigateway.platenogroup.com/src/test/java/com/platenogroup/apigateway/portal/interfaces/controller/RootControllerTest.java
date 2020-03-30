@@ -1,8 +1,7 @@
 package com.platenogroup.apigateway.portal.interfaces.controller;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import org.junit.jupiter.api.AfterAll;
@@ -12,7 +11,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -21,9 +19,6 @@ class RootControllerTest {
 
 	@Autowired
 	private MockMvc mvc;
-
-//	@MockBean
-//	private UserVehicleService userVehicleService;
 
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
@@ -43,8 +38,9 @@ class RootControllerTest {
 
 	@Test
 	void test() throws Exception {
-		this.mvc.perform(get("/sboot/vehicle").accept(MediaType.TEXT_PLAIN)).andExpect(status().isOk())
-				.andExpect(content().string("Honda Civic"));
+		this.mvc.perform(get("/sample").accept(MediaType.APPLICATION_JSON_UTF8)).andExpect(status().isOk())
+				.andExpect(jsonPath("$.code").value("200"));
+
 	}
 
 }

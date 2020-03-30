@@ -10,7 +10,7 @@ import com.platenogroup.apigateway.portal.domain.service.ApiQueryService;
 import com.platenogroup.apigateway.portal.interfaces.webvo.ApiWebVo;
 import com.platenogroup.apigateway.portal.interfaces.webvo.PaginatedResult;
 
-@RestController
+//@RestController
 public class ApiController {
 
 	@Autowired
