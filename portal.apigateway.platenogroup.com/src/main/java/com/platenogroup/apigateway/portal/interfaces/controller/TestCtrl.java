@@ -1,26 +1,31 @@
 package com.platenogroup.apigateway.portal.interfaces.controller;
 
 import io.jsonwebtoken.Claims;
+import lombok.extern.slf4j.Slf4j;
+
 import org.springframework.web.bind.annotation.*;
 
-import com.platenogroup.apigateway.portal.interfaces.springsecurity.JwtUser;
+import com.platenogroup.apigateway.portal.interfaces.springsecurity.JwtUserDetail;
 import com.platenogroup.apigateway.portal.interfaces.springsecurity.JwtUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.function.Consumer;
 
 @CrossOrigin(maxAge = 3600)
 @RestController
 @RequestMapping("/test")
+@Slf4j
 public class TestCtrl {
 
 	@GetMapping("aaa")
 	public String aaa() {
 		// 获取当前登录用户
-		JwtUser jwtUser = JwtUser.getCurUser();
+		JwtUserDetail jwtUser = JwtUserDetail.currentUser();
 		System.out.println(jwtUser);
+		System.getProperties().list(System.out);
 		return "sucess.........";
 	}
 

@@ -1,8 +1,6 @@
-package com.platenogroup.apigateway.portal.domain.model;
+package com.platenogroup.apigateway.portal.domain.model.user;
 
 import org.springframework.data.repository.CrudRepository;
-
-import com.platenogroup.apigateway.portal.domain.model.user.PortalUser;
 
 public interface PortalUserRepository extends CrudRepository<PortalUser, Long> {
 

@@ -17,7 +17,7 @@ import java.io.PrintWriter;
  * 20190220
  */
 @Component
-public class MyAuthenticationException implements AuthenticationEntryPoint {
+public class PortalAuthenticationException implements AuthenticationEntryPoint {
     @Override
     public void commence(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, AuthenticationException e) throws IOException, ServletException {
         System.out.println("AuthenticationEntryPoint检测到异常:"+e);

@@ -15,7 +15,7 @@ import java.io.IOException;
  *  * 20190220
  */
 @Component
-public class MyAuthenticationFailHandler implements AuthenticationFailureHandler   {
+public class PortalAuthenticationFailHandler implements AuthenticationFailureHandler   {
     @Override
     public void onAuthenticationFailure(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, AuthenticationException e) throws IOException, ServletException {
         System.out.println("登录失败");

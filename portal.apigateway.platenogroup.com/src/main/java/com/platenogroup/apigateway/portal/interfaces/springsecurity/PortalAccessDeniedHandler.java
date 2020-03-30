@@ -18,7 +18,7 @@ import java.io.PrintWriter;
  * 20190220
  */
 @Component
-public class MyAccessDeniedHandler implements AccessDeniedHandler {
+public class PortalAccessDeniedHandler implements AccessDeniedHandler {
     @Override
     public void handle(HttpServletRequest httpServletRequest, HttpServletResponse response, AccessDeniedException e) throws IOException, ServletException {
         //登陆状态下，权限不足执行该方法

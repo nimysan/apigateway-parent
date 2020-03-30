@@ -6,6 +6,7 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
@@ -23,9 +24,10 @@ public class PortalUser {
 		// For JPA
 	}
 
-	public PortalUser(Long id, String username) {
+	public PortalUser(Long id, String username, String password) {
 		this.id = id;
 		this.username = username;
+		this.password = password;
 	}
 
 	@Getter
@@ -46,7 +48,7 @@ public class PortalUser {
 	private String password;
 
 	@Getter
-	@OneToMany(cascade = CascadeType.ALL)
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private Set<PortalUserRole> roles;
 
 	public void addRole(PortalUserRole role) {

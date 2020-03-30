@@ -9,7 +9,7 @@ import com.platenogroup.apigateway.portal.interfaces.webvo.SampleVo;
 @RestController
 public class RootController {
 
-	@GetMapping("/sample")
+	@GetMapping("/info/sample")
 	public SampleVo getSample() {
 		return new SampleVo("joey", "a new man");
 	}

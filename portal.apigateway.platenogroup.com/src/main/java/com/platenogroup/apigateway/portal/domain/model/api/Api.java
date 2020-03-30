@@ -24,6 +24,11 @@ import lombok.Data;
 @Entity
 public class Api {
 
+	@SuppressWarnings("unused")
+	private Api() {
+		// for jpa
+	}
+
 	@Id
 	private long id;
 
@@ -55,6 +60,7 @@ public class Api {
 	@OneToMany
 	private List<ApiAuth> auths;
 
+	@Column
 	private int secretLevel; // 私密等級
 
 	@Column

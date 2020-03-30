@@ -23,7 +23,7 @@ import java.io.IOException;
  *  * 20190220
  */
 @Component
-public class MyJwtTokenFilter extends OncePerRequestFilter {
+public class PortalJwtTokenFilter extends OncePerRequestFilter {
 
     @Autowired
     UserDetailsService myUserDetailsService;
@@ -39,7 +39,7 @@ public class MyJwtTokenFilter extends OncePerRequestFilter {
         if (authHeader != null && authHeader.startsWith(tokenHead)) {
             String authToken = authHeader.substring(tokenHead.length());
             Claims Claims = JwtUtils.parseJWT(authToken);
-            String username = Claims.getId();
+            String username = Claims.get("uid", String.class);
             System.out.println("username:" + username);
             //验证token,具体怎么验证看需求，可以只验证token不查库，把权限放在jwt中即可
             UserDetails UserDetails = myUserDetailsService.loadUserByUsername(username);
