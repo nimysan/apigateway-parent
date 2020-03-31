@@ -2,8 +2,9 @@ package com.platenogroup.apigateway.portal.infrastructure.system;
 
 import org.springframework.security.core.context.SecurityContextHolder;
 
-import com.platenogroup.apigateway.portal.domain.auth.PortalUserDetail;
 import com.platenogroup.apigateway.portal.domain.canonicalmodel.UserData;
+import com.platenogroup.apigateway.portal.interfaces.springsecurity.JwtUserDetail;
+import com.vluee.ddd.support.domain.AggregateId;
 
 /**
  * 系統辅助类
@@ -15,9 +16,9 @@ public final class SystemContext {
 
 	public static final UserData getWorkuser() {
 		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		if (principal != null && principal instanceof PortalUserDetail) {
-			PortalUserDetail portalUserDetail = (PortalUserDetail) principal;
-			return new UserData(portalUserDetail.getAggregateId(), portalUserDetail.getUsername());
+		if (principal != null && principal instanceof JwtUserDetail) {
+			JwtUserDetail portalUserDetail = (JwtUserDetail) principal;
+			return new UserData(new AggregateId(portalUserDetail.getUserId()), portalUserDetail.getUsername());
 		}
 		return null;
 	}

@@ -16,10 +16,12 @@ public class JwtUserDetail implements UserDetails {
 	private static final long serialVersionUID = -3375854102292237823L;
 	private String username;
 	private String password;
+	private String userId;
 	// 权限
 	private Collection<? extends GrantedAuthority> authorities;
 
-	public JwtUserDetail(String username, String password, List<GrantedAuthority> authorities) {
+	public JwtUserDetail(String userId, String username, String password, List<GrantedAuthority> authorities) {
+		this.userId = userId;
 		this.username = username;
 		this.password = password;
 		this.authorities = authorities;

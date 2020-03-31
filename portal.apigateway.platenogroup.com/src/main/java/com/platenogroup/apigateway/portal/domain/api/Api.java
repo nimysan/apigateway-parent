@@ -9,7 +9,9 @@ import javax.persistence.OneToMany;
 import javax.persistence.Transient;
 
 import com.platenogroup.apigateway.portal.domain.canonicalmodel.UserData;
+import com.vluee.ddd.support.domain.AggregateId;
 import com.vluee.ddd.support.domain.BaseAggregateRoot;
+import com.vluee.ddd.support.domain.DomainOperationException;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -52,6 +54,9 @@ public class Api extends BaseAggregateRoot {
 	@Column
 	private String description;
 
+	@Column(nullable = false)
+	private int apiVersion = 1; // 默认版本是1
+
 	/**
 	 * 支持的认证方式
 	 */
@@ -64,7 +69,8 @@ public class Api extends BaseAggregateRoot {
 	@Column
 	private ApiStatus status = ApiStatus.ACTIVE;
 
-	public Api(UserData createdBy, String name, String accessPath, String description) {
+	public Api(AggregateId id, UserData createdBy, String name, String accessPath, String description) {
+		this.aggregateId = id;
 		this.createdBy = createdBy;
 		this.name = name;
 		this.accessPath = accessPath;
@@ -79,6 +85,18 @@ public class Api extends BaseAggregateRoot {
 
 	public void deactive() {
 		// eventPublisher.publish(new ApiDeactiveEvent(getAggregateId()));
+	}
+
+	public void active() {
+		if (ApiStatus.ACTIVE.equals(getStatus())) {
+			throw new DomainOperationException(aggregateId, "API本身是激活的，无法再次激活");
+		}
+		checkRouteDefinition();
+		this.status = ApiStatus.ACTIVE;
+	}
+
+	private void checkRouteDefinition() {
+
 	}
 
 }

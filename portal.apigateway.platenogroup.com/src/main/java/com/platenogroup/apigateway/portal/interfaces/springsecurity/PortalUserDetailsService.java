@@ -33,17 +33,11 @@ public class PortalUserDetailsService implements UserDetailsService {
 			log.warn("No user found with username {}", username);
 			throw new UsernameNotFoundException(String.format("No user found with username."));
 		}
-
-//		UserDetails assembleUserDetail = portalUserAssembler.assembleUserDetail(portalUser);
-//		log.debug("Portal user is: {}", JSON.toJSONString(assembleUserDetail));
-
 		List<GrantedAuthority> list = new ArrayList<GrantedAuthority>();
 		GrantedAuthority au = new SimpleGrantedAuthority("ROLE_USER");
 		list.add(au);
-		// 123456 自定义MD5加密后=e10adc3949ba59abbe56e057f20f883e
 		JwtUserDetail JwtUser = userAssembler.assembleUserDetail(portalUser);
-
-		new JwtUserDetail(username, "e10adc3949ba59abbe56e057f20f883e", list);
+		new JwtUserDetail(portalUser.getAggregateId().getId(), username, "e10adc3949ba59abbe56e057f20f883e", list);
 		log.debug("User info: {}", JwtUser);
 		return JwtUser;
 	}

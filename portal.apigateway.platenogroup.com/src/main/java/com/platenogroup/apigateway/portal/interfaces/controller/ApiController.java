@@ -1,30 +1,37 @@
 package com.platenogroup.apigateway.portal.interfaces.controller;
 
-import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.platenogroup.apigateway.portal.domain.service.ApiService;
+import com.platenogroup.apigateway.portal.interfaces.assembler.ApiWebAssembler;
 import com.platenogroup.apigateway.portal.interfaces.dto.ApiDto;
+import com.platenogroup.apigateway.portal.interfaces.dto.ApiRequestDto;
+import com.vluee.ddd.support.domain.AggregateId;
 
 @RestController
 @RequestMapping("/api")
 public class ApiController {
 
-	// @Autowired
-	// private ApiQueryService queryService;
-
 	@Autowired
 	private ApiService apiService;
 
+	@Autowired
+	private ApiWebAssembler apiWebAssembler;
+
 	@GetMapping
-	public List<ApiDto> list() {
-		return Collections.emptyList();
+	public ResponseEntity<List<ApiDto>> list() {
+		return ResponseEntity
+				.ok(apiService.findAll().stream().map(t -> apiWebAssembler.assembler(t)).collect(Collectors.toList()));
 	}
 
 	/**
@@ -33,12 +40,21 @@ public class ApiController {
 	@GetMapping("/sample")
 	@PreAuthorize("hasAuthority('ROLE_api_creator')")
 	public void createSampleApi() {
-		apiService.addApi("business", "a.b.c", "tetst");
+		apiService.createApi("business", "a.b.c", "tetst");
 	}
 
-//	@PreAuthorize("hasRole('api_creator')")
-//	public ApiDto create() {
-//
+	@PostMapping
+	@PreAuthorize("hasAuthority('ROLE_api_creator')")
+	public ResponseEntity<String> create(@RequestBody ApiRequestDto apiDto) {
+		AggregateId apiId = apiService.createApi(apiDto.getName(), apiDto.getAccessPath(), apiDto.getDescription());
+		return ResponseEntity.ok(apiId.getId());
+	}
+
+//	@PostMapping("")
+//	@PreAuthorize("hasAuthority('ROLE_api_creator')")
+//	public ResponseEntity<Void> active(String id) {
+//		apiService.active(new AggregateId(id));
+//		return ResponseEntity.ok().build();
 //	}
 
 }

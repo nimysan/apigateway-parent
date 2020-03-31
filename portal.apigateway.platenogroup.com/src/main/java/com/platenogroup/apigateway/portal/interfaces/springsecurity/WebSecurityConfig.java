@@ -19,10 +19,11 @@ import org.springframework.security.web.authentication.logout.LogoutFilter;
 import com.platenogroup.apigateway.portal.infrastructure.system.ApiPortalPasswordEncoder;
 
 /**
- * Spring security的总配置类 
+ * Spring security的总配置类
  * 
- *  @PreAuthroized("hasRole('ROLE_AAA')") 请确保你的有ROLE_前缀，最终比较的代码可以参考 
- *  @see SecurityExpressionRoot
+ * @PreAuthroized("hasRole('ROLE_AAA')") 请确保你的有ROLE_前缀，最终比较的代码可以参考
+ * 
+ * @see SecurityExpressionRoot
  */
 @Configuration
 @EnableWebSecurity
@@ -50,7 +51,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Autowired
 	ApiPortalPasswordEncoder passwordEncoder;
-	
 
 	@Autowired
 	public void configureAuthentication(AuthenticationManagerBuilder authenticationManagerBuilder) throws Exception {
@@ -86,6 +86,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				.permitAll()
 				// 对于获取token的rest api要允许匿名访问
 				.antMatchers("/test/**").permitAll()
+				.antMatchers(HttpMethod.GET, "/api/").permitAll()
 				// 除上面外的所有请求全部需要鉴权认证
 				.anyRequest().authenticated();
 
