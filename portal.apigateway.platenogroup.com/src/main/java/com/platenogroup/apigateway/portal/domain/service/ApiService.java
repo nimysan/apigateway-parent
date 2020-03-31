@@ -13,4 +13,6 @@ public interface ApiService {
 
 	List<Api> findAll();
 
+	void publish(String resourceId);
+
 }

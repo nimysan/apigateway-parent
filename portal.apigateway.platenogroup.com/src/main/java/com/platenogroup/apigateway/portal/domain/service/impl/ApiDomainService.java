@@ -31,7 +31,7 @@ public class ApiDomainService implements ApiService {
 	@Override
 	public AggregateId createApi(String name, String accessPath, String description) {
 		Api api = apiFactory.createApi(name, accessPath, description);
-		// check name and accessPath should be unique
+		// TODO check name and accessPath should be unique
 		apiRepository.save(api);
 		log.debug("Create api with name {} and path:{}", name, accessPath);
 		return api.getAggregateId();
@@ -47,5 +47,15 @@ public class ApiDomainService implements ApiService {
 	@Override
 	public List<Api> findAll() {
 		return Lists.newArrayList(apiRepository.findAll());
+	}
+
+	@Override
+	public void publish(String resourceId) {
+		AggregateId id = new AggregateId(resourceId);
+		Api api = apiRepository.findById(id)
+				.orElseThrow(() -> new DomainOperationException(id, String.format("目标对象%s不存在", id)));
+		api.publish();
+		log.debug("Publish resource {} successed", resourceId);
+		// TODO publish to redis and wait "api gateway engine" to consume it
 	}
 }
