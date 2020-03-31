@@ -1,7 +1,7 @@
 package com.platenogroup.apigateway.portal.domain.service;
 
+import com.platenogroup.apigateway.portal.domain.model.role.PortalUserRole;
 import com.platenogroup.apigateway.portal.domain.model.user.PortalUser;
-import com.platenogroup.apigateway.portal.domain.model.user.PortalUserRole;
 
 public interface PortalUserService {
 

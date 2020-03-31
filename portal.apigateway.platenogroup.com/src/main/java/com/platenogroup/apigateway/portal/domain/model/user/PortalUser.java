@@ -7,32 +7,28 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
-import com.platenogroup.apigateway.portal.domain.shared.AggregateRoot;
+import com.platenogroup.apigateway.portal.domain.model.role.PortalUserRole;
+import com.vluee.ddd.support.domain.AggregateId;
+import com.vluee.ddd.support.domain.BaseAggregateRoot;
 
 import lombok.Getter;
 import lombok.Setter;
 
-@AggregateRoot
 @Entity
-public class PortalUser {
+public class PortalUser extends BaseAggregateRoot {
 
 	@SuppressWarnings("unused")
 	private PortalUser() {
 		// For JPA
 	}
 
-	public PortalUser(Long id, String username, String password) {
-		this.id = id;
+	public PortalUser(AggregateId id, String username, String password) {
+		this.aggregateId = id;
 		this.username = username;
 		this.password = password;
 	}
-
-	@Getter
-	@Id
-	private long id;
 
 	@Getter
 	@Column(unique = true, nullable = false)

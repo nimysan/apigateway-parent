@@ -5,13 +5,16 @@ import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
-import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Transient;
 
-import com.platenogroup.apigateway.portal.domain.shared.AggregateRoot;
+import com.platenogroup.apigateway.portal.domain.canonicalmodel.UserData;
+import com.platenogroup.apigateway.portal.domain.model.api.events.ApiDeactiveEvent;
+import com.platenogroup.apigateway.portal.domain.model.api.events.ApiPublishEvent;
+import com.vluee.ddd.support.domain.BaseAggregateRoot;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 /**
  * 聚合根
@@ -20,17 +23,14 @@ import lombok.Data;
  *
  */
 @Data
-@AggregateRoot
 @Entity
-public class Api {
+@EqualsAndHashCode(callSuper = false)
+public class Api extends BaseAggregateRoot {
 
 	@SuppressWarnings("unused")
 	private Api() {
 		// for jpa
 	}
-
-	@Id
-	private long id;
 
 	@Column(unique = true, nullable = false)
 	private String name;
@@ -48,8 +48,8 @@ public class Api {
 
 	private long lastModifiedAt;
 
-	@Column(nullable = false)
-	private long createdBy;// 谁创建的API
+	@Embedded
+	private UserData createdBy;// 谁创建的API
 
 	@Column
 	private String description;
@@ -64,13 +64,23 @@ public class Api {
 	private int secretLevel; // 私密等級
 
 	@Column
-	private int status = ApiConstants.API_STATUS_ACTIVE; // 当前状态
+	private ApiStatus status = ApiStatus.ACTIVE;
 
-	public Api(long createdBy, String name, String accessPath, String description) {
+	public Api(UserData createdBy, String name, String accessPath, String description) {
 		this.createdBy = createdBy;
 		this.name = name;
 		this.accessPath = accessPath;
 		this.description = description;
+		// default create active api
+		this.status = ApiStatus.ACTIVE;
+	}
+
+	public void publish() {
+		eventPublisher.publish(new ApiPublishEvent(getAggregateId()));
+	}
+
+	public void deactive() {
+		eventPublisher.publish(new ApiDeactiveEvent(getAggregateId()));
 	}
 
 }

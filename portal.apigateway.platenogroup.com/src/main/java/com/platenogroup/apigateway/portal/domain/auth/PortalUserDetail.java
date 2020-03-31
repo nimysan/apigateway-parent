@@ -10,21 +10,28 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import com.platenogroup.apigateway.portal.domain.model.user.PortalUser;
+import com.vluee.ddd.support.domain.AggregateId;
 
 public class PortalUserDetail implements UserDetails {
-	private PortalUser portalUser = null;
+
+	private static final long serialVersionUID = 6056431552472407748L;
+
 	private List<GrantedAuthority> authorities = null;
 
+	private AggregateId aggregateId;
+	private String username;
+	private String password;
+
 	public PortalUserDetail(PortalUser portalUser) {
-		this.portalUser = portalUser;
 		authorities = new ArrayList<GrantedAuthority>();
 		portalUser.getRoles().forEach(t -> {
 			authorities.add(new SimpleGrantedAuthority(t.getRoleName()));
 		});
 		authorities.add(new SimpleGrantedAuthority("ROLE_ANONYMOUS"));
+		this.aggregateId = portalUser.getAggregateId();
+		this.username = portalUser.getUsername();
+		this.password = portalUser.getPassword();
 	}
-
-	private static final long serialVersionUID = 6056431552472407748L;
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -33,12 +40,19 @@ public class PortalUserDetail implements UserDetails {
 
 	@Override
 	public String getPassword() {
-		return portalUser.getPassword();
+		return this.password;
 	}
 
 	@Override
 	public String getUsername() {
-		return portalUser.getUsername();
+		return this.username;
+	}
+
+	/**
+	 * @return the aggregateId
+	 */
+	public AggregateId getAggregateId() {
+		return aggregateId;
 	}
 
 	@Override

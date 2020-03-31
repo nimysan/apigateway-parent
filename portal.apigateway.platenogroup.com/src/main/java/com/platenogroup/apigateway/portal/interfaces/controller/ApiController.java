@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.platenogroup.apigateway.portal.domain.service.ApiQueryService;
 import com.platenogroup.apigateway.portal.domain.service.ApiService;
 import com.platenogroup.apigateway.portal.interfaces.dto.ApiDto;
 
@@ -24,7 +23,6 @@ public class ApiController {
 	private ApiService apiService;
 
 	@GetMapping
-	@PreAuthorize("hasAuthority('ROLE_api_consumer')")
 	public List<ApiDto> list() {
 		return Collections.emptyList();
 	}
@@ -35,10 +33,7 @@ public class ApiController {
 	@GetMapping("/sample")
 	@PreAuthorize("hasAuthority('ROLE_api_creator')")
 	public void createSampleApi() {
-		apiService.addApi("business", "a.b.c");
-		apiService.addApi("business1", "a.b.1");
-		apiService.addApi("business2", "a.b.2");
-		apiService.addApi("business3", "a.b.3");
+		apiService.addApi("business", "a.b.c", "tetst");
 	}
 
 //	@PreAuthorize("hasRole('api_creator')")

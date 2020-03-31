@@ -6,8 +6,8 @@ import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import com.platenogroup.apigateway.portal.domain.model.role.PortalUserRole;
 import com.platenogroup.apigateway.portal.domain.model.user.PortalUser;
-import com.platenogroup.apigateway.portal.domain.model.user.PortalUserRole;
 import com.platenogroup.apigateway.portal.domain.service.PortalUserService;
 
 import lombok.extern.slf4j.Slf4j;

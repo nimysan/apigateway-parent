@@ -1,4 +1,4 @@
-package com.platenogroup.apigateway.portal.domain.model.user;
+package com.platenogroup.apigateway.portal.domain.model.role;
 
 import org.springframework.data.repository.CrudRepository;
 
