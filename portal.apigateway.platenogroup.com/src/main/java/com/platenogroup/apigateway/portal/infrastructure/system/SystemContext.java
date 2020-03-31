@@ -5,6 +5,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import com.platenogroup.apigateway.portal.domain.canonicalmodel.UserData;
 import com.platenogroup.apigateway.portal.interfaces.springsecurity.JwtUserDetail;
 import com.vluee.ddd.support.domain.AggregateId;
+import com.vluee.ddd.support.domain.DomainEventPublisher;
 
 /**
  * 系統辅助类
@@ -14,6 +15,8 @@ import com.vluee.ddd.support.domain.AggregateId;
  */
 public final class SystemContext {
 
+	private static DomainEventPublisher eventPublisher;
+
 	public static final UserData getWorkuser() {
 		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		if (principal != null && principal instanceof JwtUserDetail) {
@@ -22,4 +25,13 @@ public final class SystemContext {
 		}
 		return null;
 	}
+
+	public static final DomainEventPublisher getEventPublisher() {
+		return eventPublisher;
+	}
+
+	public static void setDomainEventPublisher(DomainEventPublisher dep) {
+		eventPublisher = dep;
+	}
+
 }

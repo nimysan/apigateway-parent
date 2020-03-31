@@ -1,4 +1,4 @@
-package com.platenogroup.apigateway.dispatcher.infrastructure.rabbitmq;
+package com.platenogroup.apigateway.portal.infrastructure.system;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;

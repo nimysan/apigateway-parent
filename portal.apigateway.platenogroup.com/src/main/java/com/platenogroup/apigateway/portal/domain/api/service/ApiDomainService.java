@@ -1,17 +1,18 @@
-package com.platenogroup.apigateway.portal.domain.service.impl;
+package com.platenogroup.apigateway.portal.domain.api.service;
 
 import java.util.List;
 
+import javax.inject.Inject;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.config.AutowireCapableBeanFactory;
 import org.springframework.stereotype.Service;
 
 import com.google.common.collect.Lists;
 import com.platenogroup.apigateway.portal.domain.api.Api;
 import com.platenogroup.apigateway.portal.domain.api.ApiFactory;
 import com.platenogroup.apigateway.portal.domain.api.ApiRepository;
-import com.platenogroup.apigateway.portal.domain.service.ApiService;
 import com.vluee.ddd.support.domain.AggregateId;
 import com.vluee.ddd.support.domain.DomainOperationException;
 
@@ -27,6 +28,9 @@ public class ApiDomainService implements ApiService {
 
 	@Autowired
 	private ApiRepository apiRepository;
+	
+	@Inject
+	private AutowireCapableBeanFactory spring;
 
 	@Override
 	public AggregateId createApi(String name, String accessPath, String description) {

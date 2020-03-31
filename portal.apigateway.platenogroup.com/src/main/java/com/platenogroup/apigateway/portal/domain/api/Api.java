@@ -8,7 +8,9 @@ import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.Transient;
 
+import com.platenogroup.apigateway.portal.domain.api.event.ApiPublishEvent;
 import com.platenogroup.apigateway.portal.domain.canonicalmodel.UserData;
+import com.platenogroup.apigateway.portal.infrastructure.system.SystemContext;
 import com.vluee.ddd.support.domain.AggregateId;
 import com.vluee.ddd.support.domain.BaseAggregateRoot;
 import com.vluee.ddd.support.domain.DomainOperationException;
@@ -80,11 +82,10 @@ public class Api extends BaseAggregateRoot {
 	}
 
 	public void publish() {
-		// eventPublisher.publish(new ApiPublishEvent(getAggregateId()));
+		SystemContext.getEventPublisher().publish(new ApiPublishEvent(Api.class, getAggregateId()));
 	}
 
 	public void deactive() {
-		// eventPublisher.publish(new ApiDeactiveEvent(getAggregateId()));
 	}
 
 	public void active() {

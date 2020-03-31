@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.platenogroup.apigateway.portal.domain.service.ApiService;
+import com.platenogroup.apigateway.portal.domain.api.service.ApiService;
 import com.platenogroup.apigateway.portal.interfaces.assembler.ApiWebAssembler;
 import com.platenogroup.apigateway.portal.interfaces.dto.ApiDto;
 import com.platenogroup.apigateway.portal.interfaces.dto.ApiRequestDto;

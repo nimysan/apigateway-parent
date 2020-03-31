@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.ResourceAccessException;
 
-import com.platenogroup.apigateway.portal.domain.service.ApiService;
+import com.platenogroup.apigateway.portal.domain.api.service.ApiService;
 
 /**
  * /publish?type=api&resourceid=xxx-xxx-xxx-xxx

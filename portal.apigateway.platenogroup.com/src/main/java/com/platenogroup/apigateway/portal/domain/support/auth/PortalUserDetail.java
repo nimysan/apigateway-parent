@@ -1,4 +1,4 @@
-package com.platenogroup.apigateway.portal.domain.auth;
+package com.platenogroup.apigateway.portal.domain.support.auth;
 
 import java.util.ArrayList;
 import java.util.Collection;

@@ -1,4 +1,4 @@
-package com.platenogroup.apigateway.portal.domain.service;
+package com.platenogroup.apigateway.portal.domain.api.service;
 
 import java.util.List;
 

@@ -13,6 +13,8 @@ import org.springframework.stereotype.Component;
 
 import com.platenogroup.apigateway.dispatcher.domain.service.RouteRuleService;
 
+import lombok.extern.slf4j.Slf4j;
+
 /**
  * 使用SPEL表达式，动态使用QUEUE name
  * 
@@ -21,6 +23,7 @@ import com.platenogroup.apigateway.dispatcher.domain.service.RouteRuleService;
  */
 @Component
 @RabbitListener(queues = "#{refersh_route_queue.name}")
+@Slf4j
 public class RouteRuleRefreshListener {
 
 	public static final Charset CHARSET = StandardCharsets.UTF_8;
@@ -43,13 +46,13 @@ public class RouteRuleRefreshListener {
 		for (int i = 0; i < payload.length; i++) {
 			bs[i] = payload[i].byteValue();
 		}
-		System.out.println("processByteMessage消费者收到消息  : " + new String(bs, CHARSET));
+		log.debug("processByteMessage消费者收到消息  : " + new String(bs, CHARSET));
 		routeRuleService.refreshRoutes();
 	}
 
 	@RabbitHandler
 	public void process_byteMessages(byte[] result) {
-		System.out.println("process_byteMessages消费者收到消息  : " + new String(result, CHARSET));
+		log.debug("process_byteMessages消费者收到消息  : " + new String(result, CHARSET));
 		routeRuleService.refreshRoutes();
 	}
 
