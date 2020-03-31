@@ -5,10 +5,14 @@ import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Import;
 
+import com.fasterxml.jackson.databind.annotation.JsonAppend.Attr;
 import com.platenogroup.apigateway.portal.application.service.UserRoleManagementService;
 import com.platenogroup.apigateway.portal.domain.role.PortalUserRole;
 import com.platenogroup.apigateway.portal.domain.user.PortalUser;
+import com.vluee.ddd.support.infrastructure.domainevent.SimpleEventPublisher;
+import com.vluee.ddd.support.infrastructure.domainevent.impl.EventListenerBeanPostProcessor;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -21,10 +25,14 @@ import lombok.extern.slf4j.Slf4j;
  */
 @SpringBootApplication
 @Slf4j
+@Import(value = { EventListenerBeanPostProcessor.class, SimpleEventPublisher.class })
 public class ApiGatewayPortalApplication implements ApplicationRunner {
 
 	@Autowired
 	UserRoleManagementService userService;
+
+	@Autowired
+	private SimpleEventPublisher simpleEventPublisher;
 
 	public static void main(String[] args) {
 		SpringApplication.run(ApiGatewayPortalApplication.class, args);

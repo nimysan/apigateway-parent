@@ -6,6 +6,7 @@ import com.platenogroup.apigateway.portal.domain.canonicalmodel.UserData;
 import com.platenogroup.apigateway.portal.interfaces.springsecurity.JwtUserDetail;
 import com.vluee.ddd.support.domain.AggregateId;
 import com.vluee.ddd.support.domain.DomainEventPublisher;
+import com.vluee.ddd.support.infrastructure.domainevent.SimpleEventPublisher;
 
 /**
  * 系統辅助类
@@ -14,8 +15,6 @@ import com.vluee.ddd.support.domain.DomainEventPublisher;
  *
  */
 public final class SystemContext {
-
-	private static DomainEventPublisher eventPublisher;
 
 	public static final UserData getWorkuser() {
 		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -27,11 +26,7 @@ public final class SystemContext {
 	}
 
 	public static final DomainEventPublisher getEventPublisher() {
-		return eventPublisher;
-	}
-
-	public static void setDomainEventPublisher(DomainEventPublisher dep) {
-		eventPublisher = dep;
+		return SimpleEventPublisher.INSTANCE;
 	}
 
 }
