@@ -12,7 +12,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 
 import com.platenogroup.apigateway.portal.application.service.UserRoleManagementService;
-import com.platenogroup.apigateway.portal.domain.model.user.PortalUser;
+import com.platenogroup.apigateway.portal.domain.user.PortalUser;
 
 import lombok.extern.slf4j.Slf4j;
 

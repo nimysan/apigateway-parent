@@ -5,11 +5,11 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.platenogroup.apigateway.portal.domain.model.role.PortalUserRole;
-import com.platenogroup.apigateway.portal.domain.model.role.PortalUserRoleRepository;
-import com.platenogroup.apigateway.portal.domain.model.user.PortalUser;
-import com.platenogroup.apigateway.portal.domain.model.user.PortalUserRepository;
-import com.platenogroup.apigateway.portal.domain.service.impl.PortalUserPasswordEncoder;
+import com.platenogroup.apigateway.portal.domain.role.PortalUserRole;
+import com.platenogroup.apigateway.portal.domain.role.PortalUserRoleRepository;
+import com.platenogroup.apigateway.portal.domain.user.PortalUser;
+import com.platenogroup.apigateway.portal.domain.user.PortalUserRepository;
+import com.platenogroup.apigateway.portal.infrastructure.system.ApiPortalPasswordEncoder;
 import com.vluee.ddd.support.domain.AggregateId;
 
 import lombok.extern.slf4j.Slf4j;
@@ -26,7 +26,7 @@ public class UserRoleManagementService {
 	private PortalUserRoleRepository roleRepository;
 
 	@Autowired
-	private PortalUserPasswordEncoder passwordEncoder;
+	private ApiPortalPasswordEncoder passwordEncoder;
 
 	public PortalUser registerUserWithPassword(String username, String password) {
 		PortalUser user = new PortalUser(AggregateId.generate(), username, passwordEncoder.encode(password));

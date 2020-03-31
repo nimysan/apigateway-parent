@@ -3,9 +3,9 @@ package com.platenogroup.apigateway.portal.domain.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.platenogroup.apigateway.portal.domain.model.api.Api;
-import com.platenogroup.apigateway.portal.domain.model.api.ApiFactory;
-import com.platenogroup.apigateway.portal.domain.model.api.ApiRepository;
+import com.platenogroup.apigateway.portal.domain.api.Api;
+import com.platenogroup.apigateway.portal.domain.api.ApiFactory;
+import com.platenogroup.apigateway.portal.domain.api.ApiRepository;
 import com.platenogroup.apigateway.portal.domain.service.ApiService;
 
 import lombok.extern.slf4j.Slf4j;

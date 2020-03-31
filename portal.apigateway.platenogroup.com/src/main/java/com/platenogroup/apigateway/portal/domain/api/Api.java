@@ -1,4 +1,4 @@
-package com.platenogroup.apigateway.portal.domain.model.api;
+package com.platenogroup.apigateway.portal.domain.api;
 
 import java.util.List;
 
@@ -9,8 +9,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.Transient;
 
 import com.platenogroup.apigateway.portal.domain.canonicalmodel.UserData;
-import com.platenogroup.apigateway.portal.domain.model.api.events.ApiDeactiveEvent;
-import com.platenogroup.apigateway.portal.domain.model.api.events.ApiPublishEvent;
 import com.vluee.ddd.support.domain.BaseAggregateRoot;
 
 import lombok.Data;
@@ -76,11 +74,11 @@ public class Api extends BaseAggregateRoot {
 	}
 
 	public void publish() {
-		eventPublisher.publish(new ApiPublishEvent(getAggregateId()));
+		// eventPublisher.publish(new ApiPublishEvent(getAggregateId()));
 	}
 
 	public void deactive() {
-		eventPublisher.publish(new ApiDeactiveEvent(getAggregateId()));
+		// eventPublisher.publish(new ApiDeactiveEvent(getAggregateId()));
 	}
 
 }

@@ -5,7 +5,7 @@ import java.util.stream.Collectors;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Component;
 
-import com.platenogroup.apigateway.portal.domain.model.user.PortalUser;
+import com.platenogroup.apigateway.portal.domain.user.PortalUser;
 
 @Component
 public class PortalUserAssembler {

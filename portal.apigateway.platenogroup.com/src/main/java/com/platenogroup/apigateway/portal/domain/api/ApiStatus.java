@@ -1,4 +1,4 @@
-package com.platenogroup.apigateway.portal.domain.model.api;
+package com.platenogroup.apigateway.portal.domain.api;
 
 public enum ApiStatus {
 

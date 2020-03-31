@@ -16,7 +16,7 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.authentication.logout.LogoutFilter;
 
-import com.platenogroup.apigateway.portal.domain.service.impl.PortalUserPasswordEncoder;
+import com.platenogroup.apigateway.portal.infrastructure.system.ApiPortalPasswordEncoder;
 
 /**
  * Spring security的总配置类 
@@ -49,7 +49,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	PortalAuthenticationException authenticationException;
 
 	@Autowired
-	PortalUserPasswordEncoder passwordEncoder;
+	ApiPortalPasswordEncoder passwordEncoder;
 	
 
 	@Autowired

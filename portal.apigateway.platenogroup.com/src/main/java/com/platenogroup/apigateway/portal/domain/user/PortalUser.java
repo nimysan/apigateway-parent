@@ -1,4 +1,4 @@
-package com.platenogroup.apigateway.portal.domain.model.user;
+package com.platenogroup.apigateway.portal.domain.user;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -9,7 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 
-import com.platenogroup.apigateway.portal.domain.model.role.PortalUserRole;
+import com.platenogroup.apigateway.portal.domain.role.PortalUserRole;
 import com.vluee.ddd.support.domain.AggregateId;
 import com.vluee.ddd.support.domain.BaseAggregateRoot;
 

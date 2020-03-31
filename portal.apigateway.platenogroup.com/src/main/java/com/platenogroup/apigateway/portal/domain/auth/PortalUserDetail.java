@@ -9,7 +9,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import com.platenogroup.apigateway.portal.domain.model.user.PortalUser;
+import com.platenogroup.apigateway.portal.domain.user.PortalUser;
 import com.vluee.ddd.support.domain.AggregateId;
 
 public class PortalUserDetail implements UserDetails {

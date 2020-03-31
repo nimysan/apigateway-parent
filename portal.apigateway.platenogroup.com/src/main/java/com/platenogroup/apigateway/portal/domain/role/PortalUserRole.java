@@ -1,4 +1,4 @@
-package com.platenogroup.apigateway.portal.domain.model.role;
+package com.platenogroup.apigateway.portal.domain.role;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

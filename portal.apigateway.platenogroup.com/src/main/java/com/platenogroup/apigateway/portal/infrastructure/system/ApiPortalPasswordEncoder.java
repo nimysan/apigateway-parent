@@ -1,4 +1,4 @@
-package com.platenogroup.apigateway.portal.domain.service.impl;
+package com.platenogroup.apigateway.portal.infrastructure.system;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 import com.platenogroup.apigateway.portal.interfaces.springsecurity.MD5Util;
 
 @Component
-public class PortalUserPasswordEncoder implements PasswordEncoder {
+public class ApiPortalPasswordEncoder implements PasswordEncoder {
 
 	@Override
 	public String encode(CharSequence rawPassword) {
