@@ -1,9 +1,9 @@
 package com.platenogroup.apigateway.portal.domain.model.user;
 
-import org.springframework.data.repository.CrudRepository;
+public interface PortalUserRepository {
 
-public interface PortalUserRepository extends CrudRepository<PortalUser, Long> {
+	public void save(PortalUser user);
 
-	public PortalUser findByUsername(String username);
+	public abstract PortalUser findByUsername(String username);
 
 }

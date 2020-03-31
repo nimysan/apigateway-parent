@@ -11,8 +11,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 
+import com.platenogroup.apigateway.portal.application.service.UserRoleManagementService;
 import com.platenogroup.apigateway.portal.domain.model.user.PortalUser;
-import com.platenogroup.apigateway.portal.domain.service.PortalUserService;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -21,7 +21,8 @@ import lombok.extern.slf4j.Slf4j;
 public class PortalUserDetailsService implements UserDetailsService {
 
 	@Autowired
-	private PortalUserService portalUserService;
+	private UserRoleManagementService portalUserService;
+
 	@Autowired
 	private PortalUserAssembler userAssembler;
 

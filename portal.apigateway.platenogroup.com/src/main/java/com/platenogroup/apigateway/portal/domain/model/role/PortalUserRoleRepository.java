@@ -1,7 +1,7 @@
 package com.platenogroup.apigateway.portal.domain.model.role;
 
-import org.springframework.data.repository.CrudRepository;
+public interface PortalUserRoleRepository  {
 
-public interface PortalUserRoleRepository extends CrudRepository<PortalUserRole, Long> {
+	void save(PortalUserRole entity);
 
 }

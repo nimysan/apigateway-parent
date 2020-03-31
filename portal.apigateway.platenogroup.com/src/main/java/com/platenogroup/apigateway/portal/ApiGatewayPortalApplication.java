@@ -6,9 +6,9 @@ import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import com.platenogroup.apigateway.portal.application.service.UserRoleManagementService;
 import com.platenogroup.apigateway.portal.domain.model.role.PortalUserRole;
 import com.platenogroup.apigateway.portal.domain.model.user.PortalUser;
-import com.platenogroup.apigateway.portal.domain.service.PortalUserService;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -24,7 +24,7 @@ import lombok.extern.slf4j.Slf4j;
 public class ApiGatewayPortalApplication implements ApplicationRunner {
 
 	@Autowired
-	PortalUserService userService;
+	UserRoleManagementService userService;
 
 	public static void main(String[] args) {
 		SpringApplication.run(ApiGatewayPortalApplication.class, args);
@@ -34,6 +34,7 @@ public class ApiGatewayPortalApplication implements ApplicationRunner {
 	public void run(ApplicationArguments args) throws Exception {
 		log.debug("初始化一些用户数据");
 		PortalUser adminUser = userService.registerUserWithPassword("admin", "123456");
+		PortalUser findByUsername = userService.findByUsername("admin");
 		PortalUser apicreatorUser = userService.registerUserWithPassword("apicreator", "test111");
 		PortalUser apiconsumerUser = userService.registerUserWithPassword("apiconsumer", "test222");
 
@@ -46,5 +47,6 @@ public class ApiGatewayPortalApplication implements ApplicationRunner {
 		userService.assignRoleToUser(apiconsumerUser, apiConsumerRole);
 
 		log.debug("初始化完成-----------------------------------------");
+		log.debug("test --- {}", findByUsername);
 	}
 }

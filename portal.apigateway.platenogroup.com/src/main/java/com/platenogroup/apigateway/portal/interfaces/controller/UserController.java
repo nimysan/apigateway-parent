@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.platenogroup.apigateway.portal.domain.service.PortalUserService;
+import com.platenogroup.apigateway.portal.application.service.UserRoleManagementService;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -14,7 +14,7 @@ import lombok.extern.slf4j.Slf4j;
 public class UserController {
 
 	@Autowired
-	private PortalUserService userService;
+	private UserRoleManagementService userService;
 
 	@PostMapping("/login")
 	public void login(@RequestParam String username, @RequestParam String password) {

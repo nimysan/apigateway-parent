@@ -1,11 +1,11 @@
 package com.platenogroup.apigateway.portal.infrastructure.repo.jpa;
 
+import org.springframework.data.repository.CrudRepository;
+
 import com.platenogroup.apigateway.portal.domain.model.api.Api;
 import com.platenogroup.apigateway.portal.domain.model.api.ApiRepository;
-import com.vluee.ddd.annotations.domain.DomainRepositoryImpl;
-import com.vluee.ddd.support.infrastructure.repository.jpa.GenericJpaRepository;
+import com.vluee.ddd.support.domain.AggregateId;
 
-@DomainRepositoryImpl
-public class ApiRepositoryJpa extends GenericJpaRepository<Api> implements ApiRepository {
+public interface ApiRepositoryJpa extends ApiRepository, CrudRepository<Api, AggregateId> {
 
 }
