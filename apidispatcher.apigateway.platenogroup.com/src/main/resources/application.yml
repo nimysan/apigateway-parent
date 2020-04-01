@@ -3,6 +3,7 @@ server:
 
 logging:  level:    org.springframework.cloud: trace
     reactor.netty: trace
+    com.platenogroup.apigateway.dispatcher: debug
 
     
 spring:

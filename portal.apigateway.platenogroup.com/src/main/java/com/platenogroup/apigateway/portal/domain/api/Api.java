@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.Transient;
 
+import com.alibaba.fastjson.JSON;
 import com.platenogroup.apigateway.portal.domain.api.event.ApiPublishEvent;
 import com.platenogroup.apigateway.portal.domain.canonicalmodel.UserData;
 import com.platenogroup.apigateway.portal.infrastructure.system.SystemContext;
@@ -81,8 +82,10 @@ public class Api extends BaseAggregateRoot {
 	}
 
 	public void publish() {
-		SystemContext.getEventPublisher().publish(
-				new ApiPublishEvent(Api.class, getAggregateId(), SystemContext.getWorkuser().getAggregateId(), null));
+		UserDefinedApi apiData = new UserDefinedApi(getAggregateId().getId(), this.routeDefinition.getUpstreamUrl(),
+				this.getAccessPath());
+		SystemContext.getEventPublisher().publish(new ApiPublishEvent(Api.class, getAggregateId(),
+				SystemContext.getWorkuser().getAggregateId(), JSON.toJSONString(apiData)));
 	}
 
 	public void deactive() {

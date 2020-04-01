@@ -3,11 +3,12 @@ package com.platenogroup.apigateway.dispatcher.infrastructure.rabbitmq;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 
+import lombok.extern.slf4j.Slf4j;
+
 /**
- * 
  * @author SeanYe
- *
  */
+@Slf4j
 public final class IpHostNameUtil {
 
 	public static final String getIpWithDefault(String defaultIp) {
@@ -17,7 +18,7 @@ public final class IpHostNameUtil {
 			String ip = addr.getHostAddress().toString();
 			return ip;
 		} catch (UnknownHostException e) {
-			e.printStackTrace();
+			log.error("Failed to get ip.", e);
 			return defaultIp;
 		}
 	}
@@ -28,7 +29,7 @@ public final class IpHostNameUtil {
 			addr = InetAddress.getLocalHost();
 			return addr.getHostName();
 		} catch (UnknownHostException e) {
-			e.printStackTrace();
+			log.error("Failed to get hostname.", e);
 			return defaultHostName;
 		}
 

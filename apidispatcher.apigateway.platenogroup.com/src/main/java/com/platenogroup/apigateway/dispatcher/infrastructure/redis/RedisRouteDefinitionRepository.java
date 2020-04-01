@@ -86,7 +86,6 @@ public class RedisRouteDefinitionRepository implements RouteDefinitionRepository
 			if (!parseObject.getId().contains("acb")) {
 				routeDefinitions.add(parseObject);
 			}
-
 		});
 		return Flux.fromIterable(routeDefinitions);
 	}
@@ -106,9 +105,10 @@ public class RedisRouteDefinitionRepository implements RouteDefinitionRepository
 				redisTemplate.opsForHash().delete(GATEWAY_ROUTES, id);
 				return Mono.empty();
 			}
-			//系统不一定会走这个分支，如果不用defer, new NotFoundException("路由文件没有找到: " + routeId) 这个对象将会被创建，但是完全无用。
-			//使用Defer以後，真正用到這個mono的時候，才會去创建一个NotFoundException对象。
-			return Mono.defer(() -> Mono.error(new NotFoundException("路由文件没有找到: " + routeId)));
+			// 系统不一定会走这个分支，如果不用defer, new NotFoundException("路由文件没有找到: " + routeId)
+			// 这个对象将会被创建，但是完全无用。
+			// 使用Defer以後，真正用到這個mono的時候，才會去创建一个NotFoundException对象。
+			return Mono.defer(() -> Mono.error(new NotFoundException("没有该路由规则: " + routeId)));
 		});
 	}
 
