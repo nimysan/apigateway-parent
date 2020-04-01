@@ -3,6 +3,7 @@ package com.platenogroup.apigateway.portal.domain.api.service;
 import java.util.List;
 
 import com.platenogroup.apigateway.portal.domain.api.Api;
+import com.platenogroup.apigateway.portal.interfaces.dto.RouteDefintionDto;
 import com.vluee.ddd.support.domain.AggregateId;
 
 public interface ApiService {
@@ -14,5 +15,7 @@ public interface ApiService {
 	List<Api> findAll();
 
 	void publish(String resourceId);
+
+	void setRouteDefinition(AggregateId id, RouteDefintionDto definition);
 
 }

@@ -23,10 +23,12 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import com.alibaba.fastjson.JSON;
 
+import lombok.extern.slf4j.Slf4j;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @Component
+@Slf4j
 public class RedisRouteDefinitionRepository implements RouteDefinitionRepository {
 
 	private static final String GATEWAY_ROUTES = "com.vluee.gateway:routes";
@@ -82,9 +84,11 @@ public class RedisRouteDefinitionRepository implements RouteDefinitionRepository
 	public Flux<RouteDefinition> getRouteDefinitions() {
 		List<RouteDefinition> routeDefinitions = new ArrayList<>(24);
 		redisTemplate.opsForHash().values(GATEWAY_ROUTES).stream().forEach(routeDefinition -> {
-			RouteDefinition parseObject = JSON.parseObject(routeDefinition.toString(), RouteDefinition.class);
-			if (!parseObject.getId().contains("acb")) {
+			try {
+				RouteDefinition parseObject = JSON.parseObject(routeDefinition.toString(), RouteDefinition.class);
 				routeDefinitions.add(parseObject);
+			} catch (Exception e) {
+				log.error("Failed to read route defintion from redis. ", e);
 			}
 		});
 		return Flux.fromIterable(routeDefinitions);

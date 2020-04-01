@@ -23,7 +23,7 @@ public class ApiDispatcherNotifier {
 
 	@EventListener
 	public void handle(ApiPublishEvent event) {
-		amqpTemplate.convertAndSend(AmqpConfiguration.RABBIT_MQ_EXCHANGE_NAME, "*", event.getDomainId().getId());
+		amqpTemplate.convertAndSend(AmqpConfiguration.RABBIT_MQ_EXCHANGE_NAME, "*", event.getPayload());
 	}
 
 }

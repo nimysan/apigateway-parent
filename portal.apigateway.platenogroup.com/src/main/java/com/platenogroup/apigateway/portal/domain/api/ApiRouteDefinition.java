@@ -10,5 +10,5 @@ import lombok.Data;
 public class ApiRouteDefinition {
 
 	@Column
-	private String upstreamUrl;
+	private String upstream;
 }

@@ -13,6 +13,8 @@ import com.google.common.collect.Lists;
 import com.platenogroup.apigateway.portal.domain.api.Api;
 import com.platenogroup.apigateway.portal.domain.api.ApiFactory;
 import com.platenogroup.apigateway.portal.domain.api.ApiRepository;
+import com.platenogroup.apigateway.portal.domain.api.ApiRouteDefinition;
+import com.platenogroup.apigateway.portal.interfaces.dto.RouteDefintionDto;
 import com.vluee.ddd.support.domain.AggregateId;
 import com.vluee.ddd.support.domain.DomainOperationException;
 
@@ -28,14 +30,13 @@ public class ApiDomainService implements ApiService {
 
 	@Autowired
 	private ApiRepository apiRepository;
-	
+
 	@Inject
 	private AutowireCapableBeanFactory spring;
 
 	@Override
 	public AggregateId createApi(String name, String accessPath, String description) {
 		Api api = apiFactory.createApi(name, accessPath, description);
-		// TODO check name and accessPath should be unique
 		apiRepository.save(api);
 		log.debug("Create api with name {} and path:{}", name, accessPath);
 		return api.getAggregateId();
@@ -60,6 +61,18 @@ public class ApiDomainService implements ApiService {
 				.orElseThrow(() -> new DomainOperationException(id, String.format("目标对象%s不存在", id)));
 		api.publish();
 		log.debug("Publish resource {} successed", resourceId);
-		// TODO publish to redis and wait "api gateway engine" to consume it
+	}
+
+	@Override
+	public void setRouteDefinition(AggregateId id, RouteDefintionDto definition) {
+		Api api = apiRepository.findById(id)
+				.orElseThrow(() -> new DomainOperationException(id, String.format("目标对象[%s]不存在", id)));
+		api.setRouteDefinition(convertRouteDefinition(definition));
+	}
+
+	private ApiRouteDefinition convertRouteDefinition(RouteDefintionDto definition) {
+		ApiRouteDefinition route = new ApiRouteDefinition();
+		route.setUpstream(definition.getUpstream());
+		return route;
 	}
 }

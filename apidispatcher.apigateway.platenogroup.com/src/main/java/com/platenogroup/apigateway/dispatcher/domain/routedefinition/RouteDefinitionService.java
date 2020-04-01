@@ -36,11 +36,11 @@ public class RouteDefinitionService {
 		if (definition == null) {
 			return;
 		}
-		routeDefinitionRepository.save(Mono.just(definition)).doOnNext(t -> {
-			if (refresh) {
-				publisher.publishEvent(new RefreshRoutesEvent(RouteDefinitionService.this));
-			}
-		});
+		routeDefinitionRepository.save(Mono.just(definition)).block();
+		// TODO is this a great way?
+		if (refresh) {
+			publisher.publishEvent(new RefreshRoutesEvent(RouteDefinitionService.this));
+		}
 	}
 
 }

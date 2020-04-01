@@ -7,7 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,6 +18,7 @@ import com.platenogroup.apigateway.portal.domain.api.service.ApiService;
 import com.platenogroup.apigateway.portal.interfaces.assembler.ApiWebAssembler;
 import com.platenogroup.apigateway.portal.interfaces.dto.ApiDto;
 import com.platenogroup.apigateway.portal.interfaces.dto.ApiRequestDto;
+import com.platenogroup.apigateway.portal.interfaces.dto.RouteDefintionDto;
 import com.vluee.ddd.support.domain.AggregateId;
 
 @RestController
@@ -48,6 +51,15 @@ public class ApiController {
 	public ResponseEntity<String> create(@RequestBody ApiRequestDto apiDto) {
 		AggregateId apiId = apiService.createApi(apiDto.getName(), apiDto.getAccessPath(), apiDto.getDescription());
 		return ResponseEntity.ok(apiId.getId());
+	}
+
+	@PutMapping("/{apiId}/route")
+	@PreAuthorize("hasAuthority('ROLE_api_creator')")
+	public ResponseEntity<Void> setupRouteDefinition(@PathVariable String apiId,
+			@RequestBody RouteDefintionDto requestVo) {
+		AggregateId aggrerateId = new AggregateId(apiId);
+		apiService.setRouteDefinition(aggrerateId, requestVo);
+		return ResponseEntity.ok().build();
 	}
 
 //	@PostMapping("")

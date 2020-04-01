@@ -51,8 +51,15 @@ public class RouteDefinitionAssembler {
 		filter1Params.put("_genkey_0", "param");
 		filter1Params.put("_genkey_1", "addParam");
 		filter1.setArgs(filter1Params);
+		
+		FilterDefinition filter2 = new FilterDefinition();
+		filter2.setName("SetPath");
+		Map<String, String> filter2Params = new HashMap<>(8);
+		filter2Params.put("_genkey_0", "param");
+		filter2Params.put("_genkey_1", "addParam");
+		filter2.setArgs(filter2Params);
 
-		definition.setFilters(Arrays.asList(filter, filter1));
+		definition.setFilters(Arrays.asList(filter, filter1, filter2));
 		definition.setPredicates(Arrays.asList(predicate));
 
 		log.debug("Route Definition: {} ", JSON.toJSONString(definition, true));

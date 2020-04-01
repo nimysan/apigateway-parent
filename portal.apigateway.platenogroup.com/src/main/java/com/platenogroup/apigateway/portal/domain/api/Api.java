@@ -82,7 +82,7 @@ public class Api extends BaseAggregateRoot {
 	}
 
 	public void publish() {
-		UserDefinedApi apiData = new UserDefinedApi(getAggregateId().getId(), this.routeDefinition.getUpstreamUrl(),
+		UserDefinedApi apiData = new UserDefinedApi(getAggregateId().getId(), this.routeDefinition.getUpstream(),
 				this.getAccessPath());
 		SystemContext.getEventPublisher().publish(new ApiPublishEvent(Api.class, getAggregateId(),
 				SystemContext.getWorkuser().getAggregateId(), JSON.toJSONString(apiData)));
