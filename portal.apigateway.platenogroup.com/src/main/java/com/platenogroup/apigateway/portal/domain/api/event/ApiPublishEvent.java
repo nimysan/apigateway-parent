@@ -7,8 +7,8 @@ public class ApiPublishEvent extends AbstractDomainEvent {
 
 	private static final long serialVersionUID = 3843879592534866544L;
 
-	public ApiPublishEvent(Class<?> domainClass, AggregateId domainId) {
-		super(domainClass, domainId);
+	public ApiPublishEvent(Class<?> domainClass, AggregateId domainId, AggregateId operatorId, String payload) {
+		super(domainClass, domainId, operatorId, payload);
 	}
 
 }

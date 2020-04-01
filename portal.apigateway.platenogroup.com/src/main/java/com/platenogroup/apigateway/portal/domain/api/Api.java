@@ -77,12 +77,12 @@ public class Api extends BaseAggregateRoot {
 		this.name = name;
 		this.accessPath = accessPath;
 		this.description = description;
-		// default create active api
 		this.status = ApiStatus.ACTIVE;
 	}
 
 	public void publish() {
-		SystemContext.getEventPublisher().publish(new ApiPublishEvent(Api.class, getAggregateId()));
+		SystemContext.getEventPublisher().publish(
+				new ApiPublishEvent(Api.class, getAggregateId(), SystemContext.getWorkuser().getAggregateId(), null));
 	}
 
 	public void deactive() {

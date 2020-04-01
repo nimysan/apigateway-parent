@@ -5,6 +5,7 @@ import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.Import;
 
 import com.platenogroup.apigateway.portal.application.service.UserRoleManagementService;
@@ -25,6 +26,7 @@ import lombok.extern.slf4j.Slf4j;
 @SpringBootApplication
 @Slf4j
 @Import(SimpleDomainEventConfiguration.class)
+@EntityScan({ "com.platenogroup.apigateway.portal", "com.vluee.ddd.support.infrastructure.domainevent" })
 public class ApiGatewayPortalApplication implements ApplicationRunner {
 
 	@Autowired
